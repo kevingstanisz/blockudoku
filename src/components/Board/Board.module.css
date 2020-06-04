@@ -1,0 +1,21 @@
+.BoardStyle {
+    color: red;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.Tile.active{
+    color: blue;
+}
+
+@media (max-width: 600px){
+    .BoardStyle {
+        width: 300px;
+        height: 300px;
+      }
+}
+
+

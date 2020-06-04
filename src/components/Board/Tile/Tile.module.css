@@ -1,0 +1,29 @@
+.Normal{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border: 1px solid red;
+    display: block;
+}
+
+.BlockOnTile{
+    outline: 3px solid green;
+    outline-offset: -2px; 
+    background-color: turquoise;
+}
+
+.LeftBorder{
+    border-left: 1px solid blue;
+}
+
+.NoRightBorder{
+    border-right: 1px solid blue;
+}
+
+.TopBorder{
+    border-top: 1px solid blue;
+}
+
+.NoBottomBorder{
+    border-bottom: 1px solid blue;
+}

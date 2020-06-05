@@ -3,8 +3,23 @@ import classes from './Board.module.css'
 import createArray from '../../utilities/Create2DArray';
 import Tile from '../Tile/Tile'
 import StartingPieces from '../StartingPieces/StartingPieces'
+import {useDispatch, useSelector} from 'react-redux';
 
-const board = props => {
+const Board = props => {
+
+    const isDragging = useSelector(state => {
+        return state.isDragging
+    });
+
+    const translation = useSelector(state => {
+        return state.translation
+    });
+
+    console.log('Board.js');
+    console.log(isDragging);
+    console.log(translation);
+
+    console.log('End Board.js');
 
     let blockudokuBoard = (createArray(9, 9));
     let displayBoard = [];
@@ -16,14 +31,11 @@ const board = props => {
         }
     }
 
-    console.log(displayBoard)
     let finalDisplayBoard = [];
 
     for(var j = 0; j < blockudokuRow.length; j++) {
         finalDisplayBoard.push(<tr key = {'row' + j}>{displayBoard.slice(j*blockudokuRow.length, (j + 1)*blockudokuRow.length)}</tr>)
     }
-
-    console.log(finalDisplayBoard)
 
     return (
         <React.Fragment>
@@ -37,5 +49,5 @@ const board = props => {
     );
 }
 
-export default board;
+export default Board;
 

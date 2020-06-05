@@ -11,13 +11,12 @@ const startingPiece = props => {
     // }
 
     let newPieces = randomStartingBlock();
-    console.log(newPieces);
 
     return(
         <div className = {classes.ThreeLayout}>
-            <StartingPiece piece = {newPieces[0]}/>
-            <StartingPiece piece = {newPieces[1]}/>
-            <StartingPiece piece = {newPieces[2]}/>
+            <StartingPiece id = {0} piece = {newPieces[0]}/>
+            <StartingPiece id = {1} piece = {newPieces[1]}/>
+            <StartingPiece id = {2} piece = {newPieces[2]}/>
         </div>
     )
 }

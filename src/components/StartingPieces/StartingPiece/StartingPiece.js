@@ -1,62 +1,61 @@
 import React, {useState, useMemo, useCallback, useEffect} from 'react';
-import classes from './StartingPiece.module.css'
-import Tile from '../../Tile/Tile'
+import {useDispatch, useSelector} from 'react-redux';
+import classes from './StartingPiece.module.css';
+import Tile from '../../Tile/Tile';
+import * as actions from '../../../store/actions/index';
 
 const StartingPiece = props => {
 
-    const POSITION = {x: 0, y: 0}
+    const dispatch = useDispatch();
 
-    const [state, setState] = useState({
-        isDragging: false,
-        origin: POSITION,
-        translation: POSITION
+    const isDragging = useSelector(state => {
+        return state.starterBlock[props.id].isDragging
     });
 
+    const translation = useSelector(state => {
+        return state.starterBlock[props.id].translation
+    });
+
+    const origin = useSelector(state => {
+        return state.starterBlock[props.id].origin
+    });
+
+    const onPickUpBlock = ({clientX, clientY}, id) => dispatch(actions.pickUpBlock({clientX, clientY}, id));
+    const onSetDownBlock = (id) => dispatch(actions.setDownBlock(id));
+    const onMoveBlock = ({clientX, clientY}, id) => dispatch(actions.moveBlock({clientX, clientY}, id));
+    const onResetBlock = (id) => dispatch(actions.resetBlock(id));
+
     const handleMouseDown = useCallback(({clientX, clientY}) => {
-      setState(state => ({
-          ...state,
-          isDragging: true,
-          origin: {x: clientX, y: clientY}
-      }))  
+        onPickUpBlock({clientX, clientY}, props.id)
     }, []);
 
     const handleMouseMove = useCallback(({clientX, clientY}) => {
-        const translation = {x: clientX - state.origin.x, y: clientY - state.origin.y};
-
-        console.log(translation);
-
-        setState(state => ({
-            ...state,
-            translation
-        }))
-    }, [state.origin]);
+        onMoveBlock({clientX, clientY}, props.id)
+    }, [origin]);
 
     const handleMouseUp = useCallback(() => {
-        setState(state => ({
-            ...state,
-            isDragging: false
-        }))
+        onSetDownBlock(props.id);
     }, []);
 
     useEffect(() => {
-        if(state.isDragging){
+        if(isDragging){
             window.addEventListener('mousemove', handleMouseMove)
             window.addEventListener('mouseup', handleMouseUp)
         } else {
             window.removeEventListener('mousemove', handleMouseMove)
             window.removeEventListener('mouseup', handleMouseUp)
 
-            setState(state => ({...state, translation: POSITION}))
+            onResetBlock(props.id);
         }
-    }, [state.isDragging, handleMouseMove, handleMouseUp]);
+    }, [isDragging, handleMouseMove, handleMouseUp]);
 
     const styles = useMemo(() => ({
-        cursor: state.isDragging ? '-webkit-grabbing' : 'webkit-grab',
-        transform: `translate(${state.translation.x}px, ${state.translation.y}px`,
-        transistion: state.isDragging ? 'none' : 'transform 500ms',
-        zIndex: state.isDragging ? 2 : 1,
-        positon: state.isDragging ? 'absolute' : 'relative'
-    }), [state.isDragging, state.translation])
+        cursor: isDragging ? '-webkit-grabbing' : 'webkit-grab',
+        transform: `translate(${translation.x}px, ${translation.y}px`,
+        transistion: isDragging ? 'none' : 'transform 500ms',
+        zIndex: isDragging ? 2 : 1,
+        positon: isDragging ? 'absolute' : 'relative'
+    }), [isDragging, translation])
 
     let displayBoard = [];
 
@@ -75,15 +74,11 @@ const StartingPiece = props => {
         }
     }
 
-    //console.log(displayBoard)
     let finalDisplayBoard = [];
 
     for(var j = 0; j < props.piece.length; j++) {
         finalDisplayBoard.push(<tr key = {'row' + j}>{displayBoard.slice(j*props.piece.length, (j + 1)*props.piece.length)}</tr>)
     }
-
-    console.log(finalDisplayBoard)
-
 
     return(
         <div className = {classes.Thirds} style = {styles} onMouseDown = {handleMouseDown}>
@@ -93,26 +88,6 @@ const StartingPiece = props => {
                 </tbody>
             </table>
         </div>
-        // <div className = {classes.PieceLayout}>
-        //     {displayBoard}
-        //     {starterPiece}
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true} newLine = {true}/>
-        //     <Tile isMini  = {true} blockOnTile = {true} />
-        //     <Tile isMini  = {true} blockOnTile = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true} newLine = {true}/>
-        //     <Tile isMini  = {true} blockOnTile = {true} />
-        //     <Tile isMini  = {true} blockOnTile = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true} newLine = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        //     <Tile isMini  = {true} emptyBlock = {true}/>
-        // </div>
     )
 }
 

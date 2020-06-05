@@ -1,30 +1,62 @@
-import React from 'react';
+import React, {useState, useMemo, useCallback, useEffect} from 'react';
 import classes from './StartingPiece.module.css'
 import Tile from '../../Tile/Tile'
 
-const startingPiece = props => {
+const StartingPiece = props => {
 
-    // console.log(props.piece)
+    const POSITION = {x: 0, y: 0}
 
-    // let starterPiece = [];
+    const [state, setState] = useState({
+        isDragging: false,
+        origin: POSITION,
+        translation: POSITION
+    });
 
-    // for(var i = 0; i < props.piece.length; i++) {
-    //     var pieceRow = props.piece[i];
-    //     //console.log(pieceRow.length);
-    //     for(var j = 0; j < pieceRow.length; j++) {
-    //         console.log(pieceRow[j])
-    //         starterPiece.push(
-    //             <Tile
-    //                 isMini  = {true} 
-    //                 emptyBlock = {pieceRow[j] ? false : true} 
-    //                 blockOnTile = {pieceRow[j] ? true : false} 
-    //                 nextToBlock = {pieceRow[j] || j == 0 ? false : pieceRow[j-1] ? true : false} 
-    //                 belowBlock = {pieceRow[j] || i == 0 ? false : props.piece[i - 1][j] ? true : false} 
-    //                 newLine = {j == 0 && i != 0 ? true : false}
-    //             />
-    //         )
-    //     }
-    // }
+    const handleMouseDown = useCallback(({clientX, clientY}) => {
+      setState(state => ({
+          ...state,
+          isDragging: true,
+          origin: {x: clientX, y: clientY}
+      }))  
+    }, []);
+
+    const handleMouseMove = useCallback(({clientX, clientY}) => {
+        const translation = {x: clientX - state.origin.x, y: clientY - state.origin.y};
+
+        console.log(translation);
+
+        setState(state => ({
+            ...state,
+            translation
+        }))
+    }, [state.origin]);
+
+    const handleMouseUp = useCallback(() => {
+        setState(state => ({
+            ...state,
+            isDragging: false
+        }))
+    }, []);
+
+    useEffect(() => {
+        if(state.isDragging){
+            window.addEventListener('mousemove', handleMouseMove)
+            window.addEventListener('mouseup', handleMouseUp)
+        } else {
+            window.removeEventListener('mousemove', handleMouseMove)
+            window.removeEventListener('mouseup', handleMouseUp)
+
+            setState(state => ({...state, translation: POSITION}))
+        }
+    }, [state.isDragging, handleMouseMove, handleMouseUp]);
+
+    const styles = useMemo(() => ({
+        cursor: state.isDragging ? '-webkit-grabbing' : 'webkit-grab',
+        transform: `translate(${state.translation.x}px, ${state.translation.y}px`,
+        transistion: state.isDragging ? 'none' : 'transform 500ms',
+        zIndex: state.isDragging ? 2 : 1,
+        positon: state.isDragging ? 'absolute' : 'relative'
+    }), [state.isDragging, state.translation])
 
     let displayBoard = [];
 
@@ -47,7 +79,6 @@ const startingPiece = props => {
     let finalDisplayBoard = [];
 
     for(var j = 0; j < props.piece.length; j++) {
-        console.log('hi');
         finalDisplayBoard.push(<tr key = {'row' + j}>{displayBoard.slice(j*props.piece.length, (j + 1)*props.piece.length)}</tr>)
     }
 
@@ -55,7 +86,7 @@ const startingPiece = props => {
 
 
     return(
-        <div className = {classes.Thirds}>
+        <div className = {classes.Thirds} style = {styles} onMouseDown = {handleMouseDown}>
             <table className = {classes.PieceLayout}>
                 <tbody>
                     {finalDisplayBoard}
@@ -85,4 +116,4 @@ const startingPiece = props => {
     )
 }
 
-export default startingPiece;
+export default StartingPiece;

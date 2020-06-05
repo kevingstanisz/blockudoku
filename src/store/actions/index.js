@@ -2,5 +2,5 @@ export {
     pickUpBlock,
     setDownBlock,
     moveBlock,
-    resetBlock
+    resetBlock,
 } from './blockMoves';

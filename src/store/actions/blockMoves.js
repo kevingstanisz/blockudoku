@@ -1,9 +1,6 @@
 import * as actionTypes from './actionTypes'
 
 export const pickUpBlock = ({clientX, clientY}, id) => {
-    console.log('action');
-    console.log(id);
-
     return{
         type: actionTypes.PICK_UP_BLOCK,
         clientX: clientX,

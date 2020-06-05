@@ -8,7 +8,8 @@ const intialState = {
         {isDragging: false, origin: POSITION, translation: POSITION},
         {isDragging: false, origin: POSITION, translation: POSITION},
         {isDragging: false, origin: POSITION, translation: POSITION}
-    ]
+    ],
+    activeBlock: -1
 }
 
 const reducer = (state = intialState, action) => {
@@ -16,6 +17,7 @@ const reducer = (state = intialState, action) => {
         case actionTypes.PICK_UP_BLOCK: 
             return{
                 ...state,
+                activeBlock: action.id,
                 starterBlock: state.starterBlock.map(
                     (starterBlock, i) => i === action.id ? {...starterBlock, isDragging: true, origin:  {x: action.clientX, y: action.clientY}}
                                                         :starterBlock
@@ -45,6 +47,7 @@ const reducer = (state = intialState, action) => {
         case actionTypes.RESET_BLOCK: 
             return{
                 ...state,
+                activeBlock: -1,
                 starterBlock: state.starterBlock.map(
                     (starterBlock, i) => i === action.id ? {...starterBlock, translation: POSITION}
                                                         :starterBlock

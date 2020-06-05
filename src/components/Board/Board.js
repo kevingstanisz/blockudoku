@@ -1,7 +1,8 @@
 import React from 'react';
 import classes from './Board.module.css'
 import createArray from '../../utilities/Create2DArray';
-import Tile from './Tile/Tile'
+import Tile from '../Tile/Tile'
+import StartingPieces from '../StartingPieces/StartingPieces'
 
 const board = props => {
 
@@ -11,7 +12,7 @@ const board = props => {
     for(var i = 0; i < blockudokuBoard.length; i++) {
         var blockudokuRow = blockudokuBoard[i];
         for(var j = 0; j < blockudokuRow.length; j++) {
-            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {i} column = {j} blockOnTile = {j == 3 ? true: false}/></td>)
+            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {i} column = {j} blockOnTile = {j == 3 || i ==3 ? true: false}/></td>)
         }
     }
 
@@ -25,11 +26,14 @@ const board = props => {
     console.log(finalDisplayBoard)
 
     return (
-        <table className = {classes.BoardStyle}>
-            <tbody className = {classes.TableBody}>
-                {finalDisplayBoard}
-            </tbody>
-        </table>
+        <React.Fragment>
+            <table className = {classes.BoardStyle}>
+                <tbody className = {classes.TableBody}>
+                    {finalDisplayBoard}
+                </tbody>
+            </table>
+            <StartingPieces newBlocks = {false}/>
+        </React.Fragment>
     );
 }
 

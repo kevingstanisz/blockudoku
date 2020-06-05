@@ -24,6 +24,26 @@ const tile = props => {
         attachedClasses.push(classes.BlockOnTile)
     }
 
+    if(props.isMini){
+        attachedClasses.push(classes.IsMini)
+    }
+
+    if(props.newLine){
+        attachedClasses.push(classes.NewLine)
+    }
+
+    if(props.emptyBlock){
+        attachedClasses.push(classes.EmptyBlock)
+    }
+
+    if(props.nextToBlock){
+        attachedClasses.push(classes.NextToBlock)
+    }
+
+    if(props.belowBlock){
+        attachedClasses.push(classes.BelowBlock)
+    }
+
     return (
         <div className = {attachedClasses.join(' ')}/>
     );

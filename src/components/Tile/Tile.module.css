@@ -3,13 +3,39 @@
     height: 100%;
     background-color: white;
     border: 1px solid red;
-    display: block;
+}
+
+.IsMini{
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid red;
+    float: left;
+}
+
+.NewLine{
+    clear: left;
+}
+
+.EmptyBlock{
+    border: none;
+    z-index: 0;
+    border: 1px dotted white;
+}
+
+.NextToBlock{
+    border-left: 1px solid green;
+}
+
+.BelowBlock{
+    border-top: 1px solid green;
 }
 
 .BlockOnTile{
     outline: 3px solid green;
     outline-offset: -2px; 
     background-color: turquoise;
+    z-index: 1;
 }
 
 .LeftBorder{
@@ -27,3 +53,4 @@
 .NoBottomBorder{
     border-bottom: 1px solid blue;
 }
+

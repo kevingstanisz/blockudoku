@@ -13,7 +13,10 @@ const startingPiece = props => {
     let newPieces = randomStartingBlock();
 
     return(
-        <div className = {classes.ThreeLayout}>
+        <div className = {classes.ThreeLayout} ref={el => {
+            if (!el) return;
+            console.log(el.getBoundingClientRect().top);}
+        }>
             <StartingPiece id = {0} piece = {newPieces[0]}/>
             <StartingPiece id = {1} piece = {newPieces[1]}/>
             <StartingPiece id = {2} piece = {newPieces[2]}/>

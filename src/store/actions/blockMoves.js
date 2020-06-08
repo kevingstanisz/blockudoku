@@ -31,3 +31,22 @@ export const resetBlock = (id) => {
         id: id
     }
 }
+
+export const setStarterPosition = (posX, posY, id) => {
+    return{
+        type: actionTypes.SET_STARTER_POSITION,
+        posX: posX,
+        posY: posY,
+        id: id
+    }
+}
+
+export const setBoardPosition = (posX, posY, sideLength) => {
+    return{
+        type: actionTypes.SET_BOARD_POSITION,
+        posX: posX,
+        posY: posY,
+        tileSide: sideLength
+    }
+}
+

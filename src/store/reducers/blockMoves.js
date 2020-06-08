@@ -5,11 +5,14 @@ const POSITION = {x: 0, y: 0}
 
 const intialState = {
     starterBlock : [
-        {isDragging: false, origin: POSITION, translation: POSITION},
-        {isDragging: false, origin: POSITION, translation: POSITION},
-        {isDragging: false, origin: POSITION, translation: POSITION}
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION},
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION},
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION}
     ],
-    activeBlock: -1
+    activeBlock: -1,
+    boardPos : {
+        startingPos: POSITION, tileSize: 0
+    }    
 }
 
 const reducer = (state = intialState, action) => {
@@ -52,6 +55,25 @@ const reducer = (state = intialState, action) => {
                     (starterBlock, i) => i === action.id ? {...starterBlock, translation: POSITION}
                                                         :starterBlock
                     )
+            };
+
+        case actionTypes.SET_STARTER_POSITION: 
+            return{
+                ...state,
+                starterBlock: state.starterBlock.map(
+                    (starterBlock, i) => i === action.id ? {...starterBlock, startingPos: {x: action.posX, y: action.posY}}
+                                                        :starterBlock
+                    )
+            };
+
+        case actionTypes.SET_BOARD_POSITION: 
+            return{
+                ...state,
+                boardPos: {
+                    ...state.boardPos,
+                    startingPos: {x: action.posX, y: action.posY},
+                    tileSize: action.tileSide
+                }
             };
 
         default: 

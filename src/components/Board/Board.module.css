@@ -1,10 +1,11 @@
 .BoardStyle {
     color: red;
-    width: 500px;
-    height: 500px;
+    width: 540px;
+    height: 540px;
     margin: auto;
     border-collapse: collapse;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .Tile.active{

@@ -27,7 +27,7 @@ const Board = props => {
     for(var i = 0; i < blockudokuBoard.length; i++) {
         var blockudokuRow = blockudokuBoard[i];
         for(var j = 0; j < blockudokuRow.length; j++) {
-            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {i} column = {j} blockOnTile = {j == 3 || i ==3 ? true: false}/></td>)
+            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {i} column = {j} isBoard = {true} topLeft = {i == 0 && j == 0 ? true : false} blockOnTile = {j == 3 || i ==3 ? true: false}/></td>)
         }
     }
 
@@ -39,7 +39,13 @@ const Board = props => {
 
     return (
         <React.Fragment>
-            <table className = {classes.BoardStyle}>
+            <table className = {classes.BoardStyle} 
+                ref={el => {
+                        if (!el) return;
+                        console.log(el.getBoundingClientRect().top);
+                    }
+                }
+            >
                 <tbody className = {classes.TableBody}>
                     {finalDisplayBoard}
                 </tbody>

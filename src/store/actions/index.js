@@ -3,4 +3,6 @@ export {
     setDownBlock,
     moveBlock,
     resetBlock,
+    setStarterPosition,
+    setBoardPosition
 } from './blockMoves';

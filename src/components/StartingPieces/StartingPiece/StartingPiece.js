@@ -63,7 +63,9 @@ const StartingPiece = props => {
         var pieceRow = props.piece[i];
         for(var j = 0; j < pieceRow.length; j++) {
             displayBoard.push(<td className = {classes.ColumnSpacing} key = {'' + i + '' + j}>
-                <Tile 
+                <Tile
+                    topLeft = {i == 0 && j == 0 ? true : false} 
+                    blockId = {props.id}
                     isMini  = {true} 
                     blockOnTile = {pieceRow[j] ? true : false} 
                     emptyBlock = {pieceRow[j] ? false : true} 

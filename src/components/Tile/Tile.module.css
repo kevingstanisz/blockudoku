@@ -38,6 +38,11 @@
     z-index: 1;
 }
 
+.HoverOnTile{
+    background-color: purple;
+    z-index: 1;
+}
+
 .LeftBorder{
     border-left: 1px solid blue;
 }

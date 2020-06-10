@@ -20,6 +20,10 @@ const StartingPiece = props => {
         return state.starterBlock[props.id].origin
     });
 
+    const activeBlock = useSelector(state => {
+        return state.activeBlock
+    });
+
     const onPickUpBlock = ({clientX, clientY}, id) => dispatch(actions.pickUpBlock({clientX, clientY}, id));
     const onSetDownBlock = (id) => dispatch(actions.setDownBlock(id));
     const onMoveBlock = ({clientX, clientY}, id) => dispatch(actions.moveBlock({clientX, clientY}, id));
@@ -67,10 +71,11 @@ const StartingPiece = props => {
                     topLeft = {i == 0 && j == 0 ? true : false} 
                     blockId = {props.id}
                     isMini  = {true} 
+                    pickedUp = {props.id == activeBlock  ? true : false}
                     blockOnTile = {pieceRow[j] ? true : false} 
                     emptyBlock = {pieceRow[j] ? false : true} 
-                    nextToBlock = {pieceRow[j] || j == 0 ? false : pieceRow[j-1] ? true : false} 
-                    belowBlock = {pieceRow[j] || i == 0 ? false : props.piece[i - 1][j] ? true : false}
+                    nextToBlock = {props.id == activeBlock ? false : pieceRow[j] || j == 0 ? false : pieceRow[j-1] ? true : false} 
+                    belowBlock = {props.id == activeBlock ? false : pieceRow[j] || i == 0 ? false : props.piece[i - 1][j] ? true : false}
                 />
             </td>)
         }

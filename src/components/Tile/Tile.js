@@ -60,6 +60,10 @@ const Tile = props => {
         attachedClasses.push(classes.BelowBlock)
     }
 
+    if(props.pickedUp){
+        attachedClasses.push(classes.PickedUp)
+    }
+
     return (
         <div className = {attachedClasses.join(' ')}
             ref={el => {

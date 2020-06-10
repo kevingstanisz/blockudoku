@@ -6,8 +6,8 @@
 }
 
 .IsMini{
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background-color: white;
     border: 1px solid red;
     float: left;
@@ -57,5 +57,11 @@
 
 .NoBottomBorder{
     border-bottom: 1px solid blue;
+}
+
+.PickedUp{
+    width: 48px;
+    height: 50px;
+    margin: 5px;
 }
 

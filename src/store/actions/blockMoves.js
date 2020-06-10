@@ -50,3 +50,10 @@ export const setBoardPosition = (posX, posY, sideLength) => {
     }
 }
 
+export const setStarterNames = (starterArray) => {
+    return{
+        type: actionTypes.SET_STARTER_NAMES,
+        starterArray: starterArray
+    }
+}
+

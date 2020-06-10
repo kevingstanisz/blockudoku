@@ -5,14 +5,15 @@ const POSITION = {x: 0, y: 0}
 
 const intialState = {
     starterBlock : [
-        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION},
-        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION},
-        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION}
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: ''},
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: ''},
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: ''}
     ],
     activeBlock: -1,
     boardPos : {
         startingPos: POSITION, tileSize: 0
-    }    
+    },
+    incrementer: 0    
 }
 
 const reducer = (state = intialState, action) => {
@@ -74,6 +75,15 @@ const reducer = (state = intialState, action) => {
                     startingPos: {x: action.posX, y: action.posY},
                     tileSize: action.tileSide
                 }
+            };
+
+        case actionTypes.SET_STARTER_NAMES: 
+            return{
+                ...state,
+                starterBlock: state.starterBlock.map(
+                    (starterBlock, i) => i > -1 ? {...starterBlock, name: action.starterArray[i].name}
+                                                        :starterBlock
+                    )
             };
 
         default: 

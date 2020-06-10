@@ -27,6 +27,10 @@ const Board = props => {
         return activeBlock != -1 ? state.boardPos.startingPos.y - state.starterBlock[activeBlock].startingPos.y  : 0
     });
 
+    const  starterName = useSelector(state => {
+        return activeBlock != -1 ? state.starterBlock[activeBlock].name  : 0
+    });
+
     const tileSize = useSelector(state => {
         return activeBlock != -1 ? state.boardPos.tileSize : 1
     });
@@ -34,23 +38,23 @@ const Board = props => {
     let tileX  = Math.round((translation.x - starterOffsetX) / tileSize);
     let tileY  = Math.round((translation.y - starterOffsetY) / tileSize);
 
-    const chosenBlock = setBlock('square')
+    const chosenBlock = setBlock(starterName)
 
     let blockudokuBoard = (createArray(9, 9));
 
-    for(var x = 0; x < blockudokuBoard.length; x++) {
-        var blockudokuRow = blockudokuBoard[x];
-        for(var y = 0; y < blockudokuRow.length; y++) {
+    for(var y = 0; y < blockudokuBoard.length; y++) {
+        var blockudokuRow = blockudokuBoard[y];
+        for(var x = 0; x < blockudokuRow.length; x++) {
             if((x - tileX < 5) && (y - tileY < 5) && (x - tileX >= 0) && (y - tileY >= 0) && activeBlock != -1){
-                if(chosenBlock[x - tileX][y - tileY]){
-                    blockudokuBoard[x][y] = 1;
+                if(chosenBlock[y - tileY][x - tileX]){
+                    blockudokuBoard[y][x] = 1;
                 }
                 else{
-                    blockudokuBoard[x][y] = 0;
+                    blockudokuBoard[y][x] = 0;
                 }
             }
             else{
-                blockudokuBoard[x][y] = 0;
+                blockudokuBoard[y][x] = 0;
             }
         }
     }
@@ -60,7 +64,7 @@ const Board = props => {
     for(var i = 0; i < blockudokuBoard.length; i++) {
         var blockudokuRow = blockudokuBoard[i];
         for(var j = 0; j < blockudokuRow.length; j++) {
-            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {i} column = {j} isBoard = {true} topLeft = {i == 0 && j == 0 ? true : false} hoverOnTile = {blockudokuBoard[j][i] ? true: false} blockOnTile = {j == 3 || i ==3 ? true: false}/></td>)
+            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {j} column = {i} isBoard = {true} topLeft = {i == 0 && j == 0 ? true : false} hoverOnTile = {blockudokuBoard[i][j] ? true: false} blockOnTile = {j == 3 || i ==3 ? true: false}/></td>)
         }
     }
 

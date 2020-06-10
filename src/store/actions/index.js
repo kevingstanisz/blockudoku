@@ -5,5 +5,6 @@ export {
     resetBlock,
     setStarterPosition,
     setBoardPosition,
-    setStarterNames
+    setStarterNames,
+    setBoard
 } from './blockMoves';

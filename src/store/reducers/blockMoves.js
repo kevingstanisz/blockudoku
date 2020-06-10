@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 import startingPiece from '../../components/StartingPieces/StartingPieces'
+import createArray from '../../utilities/Create2DArray';
 
 const POSITION = {x: 0, y: 0}
 
@@ -13,7 +14,8 @@ const intialState = {
     boardPos : {
         startingPos: POSITION, tileSize: 0
     },
-    incrementer: 0    
+    incrementer: 0,
+    blockudokuBoard: createArray(9, 9)   
 }
 
 const reducer = (state = intialState, action) => {
@@ -84,6 +86,13 @@ const reducer = (state = intialState, action) => {
                     (starterBlock, i) => i > -1 ? {...starterBlock, name: action.starterArray[i].name}
                                                         :starterBlock
                     )
+            };
+
+        case actionTypes.SET_BOARD: 
+            //console.log(action.boardArray)
+            return{
+                ...state,
+                blockudokuBoard: action.boardArray
             };
 
         default: 

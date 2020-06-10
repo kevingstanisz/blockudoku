@@ -4,6 +4,7 @@ import createArray from '../../utilities/Create2DArray';
 import Tile from '../Tile/Tile'
 import StartingPieces from '../StartingPieces/StartingPieces'
 import {useDispatch, useSelector} from 'react-redux';
+import {setBlock} from '../../utilities/RandomStartingBlock';
 
 const Board = props => {
 
@@ -33,17 +34,24 @@ const Board = props => {
     let tileX  = Math.round((translation.x - starterOffsetX) / tileSize);
     let tileY  = Math.round((translation.y - starterOffsetY) / tileSize);
 
+    const chosenBlock = setBlock('square')
+
     let blockudokuBoard = (createArray(9, 9));
 
     for(var x = 0; x < blockudokuBoard.length; x++) {
         var blockudokuRow = blockudokuBoard[x];
         for(var y = 0; y < blockudokuRow.length; y++) {
-           if((x - tileX < 5) && (y - tileY < 5) && (x - tileX >= 0) && (y - tileY >= 0) && activeBlock != -1){
-                blockudokuBoard[x][y] = 1;
-           }
-           else{
-            blockudokuBoard[x][y] = 0;
-           }
+            if((x - tileX < 5) && (y - tileY < 5) && (x - tileX >= 0) && (y - tileY >= 0) && activeBlock != -1){
+                if(chosenBlock[x - tileX][y - tileY]){
+                    blockudokuBoard[x][y] = 1;
+                }
+                else{
+                    blockudokuBoard[x][y] = 0;
+                }
+            }
+            else{
+                blockudokuBoard[x][y] = 0;
+            }
         }
     }
 

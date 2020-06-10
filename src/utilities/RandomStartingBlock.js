@@ -1,4 +1,4 @@
-function setBlock(chosenBlock){
+export function setBlock(chosenBlock){
     let block = []
 
     switch(chosenBlock){

@@ -60,46 +60,52 @@ const Board = props => {
 
     for (var i = 0; i < stateBlockudokuBoard.length; i++){
         for (var j = 0; j < stateBlockudokuBoard.length; j++){
-            if(stateBlockudokuBoard[i][j] > 0){
-                blockudokuBoard[i][j] = 2;
-                console.log('hi');
-            }
-            // console.log(stateBlockudokuBoard[i][j])
-            //blockudokuBoard[i][j] = stateBlockudokuBoard[i][j];
+            blockudokuBoard[i][j] = stateBlockudokuBoard[i][j]
         }
     }
 
-    console.log(stateBlockudokuBoard);
-    console.log(blockudokuBoard);
+    let validPlacement = true;
 
-
-    let blockSet = false;
-
+    entireGrid:
     for(var y = 0; y < blockudokuBoard.length; y++) {
         var blockudokuRow = blockudokuBoard[y];
         for(var x = 0; x < blockudokuRow.length; x++) {
-            if((x - tileX < 5) && (y - tileY < 5) && (x - tileX >= 0) && (y - tileY >= 0) && activeBlock != -1 && blockudokuBoard[y][x] != 2){
-                if(chosenBlock[y - tileY][x - tileX] &&  blockudokuBoard[y][x] != 2){
+            if((x - tileX < 5) && (y - tileY < 5) && (x - tileX >= 0) && (y - tileY >= 0) && activeBlock != -1 && chosenBlock[y - tileY][x - tileX]){
+                if(chosenBlock[y - tileY][x - tileX] && blockudokuBoard[y][x] == 2){
+                    validPlacement = false;
+                    break entireGrid;
+                }
+                else if(chosenBlock[y - tileY][x - tileX] && blockudokuBoard[y][x] != 2){
                     if(!isDragging){
-                        blockSet = true;
                         blockudokuBoard[y][x] = 2;
+                        console.log('here');
                     }
                     else{
-                        blockSet = true;
                         blockudokuBoard[y][x] = 1;
                     }
                 }
                 else{
                     blockudokuBoard[y][x] = 0;
+                    console.log('here');
                 }
-                console.log('here')
             }
-            else{
-                // console.log('here')
-                // blockudokuBoard[y][x] = 0;
+            else if(blockudokuBoard[y][x] != 2){
+                blockudokuBoard[y][x] = 0;
             }
         }
     }
+
+    if(!validPlacement){
+        for(var y = 0; y < blockudokuBoard.length; y++) {
+            var blockudokuRow = blockudokuBoard[y];
+            for(var x = 0; x < blockudokuRow.length; x++) {
+                if(stateBlockudokuBoard[y][x] != 2){
+                    blockudokuBoard[y][x] = 0;
+                }
+            }
+        }
+    }
+
 
     if(!isDragging && activeBlock != -1){
         console.log(isDragging);

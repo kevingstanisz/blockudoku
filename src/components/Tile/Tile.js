@@ -16,19 +16,19 @@ const Tile = props => {
 
     let attachedClasses = [classes.Normal];
 
-    if(props.column % 3 === 0){
+    if(props.row % 3 === 0){
         attachedClasses.push(classes.LeftBorder)
     }
 
-    if(props.column % 3 === 2){
+    if(props.row % 3 === 2){
         attachedClasses.push(classes.NoRightBorder)
     }
 
-    if(props.row % 3 === 0){
+    if(props.column % 3 === 0){
         attachedClasses.push(classes.TopBorder)
     }
 
-    if(props.row % 3 === 2){
+    if(props.column % 3 === 2){
         attachedClasses.push(classes.NoBottomBorder)
     }
 

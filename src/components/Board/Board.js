@@ -17,6 +17,7 @@ const Board = props => {
     const onSetBoard = (boardArray) => dispatch(actions.setBoard(boardArray))
     //const onSetDownBlock = (id) => dispatch(actions.setDownBlock(id));
     const onResetBlock = (id) => dispatch(actions.resetBlock(id));
+    const onCalculateCompletion = () => dispatch(actions.calculateCompletion());
 
     const activeBlock = useSelector(state => {
         return state.activeBlock
@@ -54,7 +55,16 @@ const Board = props => {
     let tileX  = Math.round((translation.x - starterOffsetX) / tileSize);
     let tileY  = Math.round((translation.y - starterOffsetY) / tileSize);
 
-    const chosenBlock = setBlock(starterName)
+    const chosenBlock = setBlock(starterName);
+
+    let numberOfTiles = 0
+
+    if(chosenBlock.length > 0){
+        numberOfTiles = chosenBlock.reduce(function(a,b) { return a.concat(b) }) // flatten array
+        .reduce(function(a,b) { return a + b });  
+    }
+
+    let numberofTilesHover = 0;
 
     var blockudokuBoard = createArray(9,9);
 
@@ -78,15 +88,15 @@ const Board = props => {
                 else if(chosenBlock[y - tileY][x - tileX] && blockudokuBoard[y][x] != 2){
                     if(!isDragging){
                         blockudokuBoard[y][x] = 2;
-                        console.log('here');
+                        numberofTilesHover++;
                     }
                     else{
                         blockudokuBoard[y][x] = 1;
+                        numberofTilesHover++;
                     }
                 }
                 else{
                     blockudokuBoard[y][x] = 0;
-                    console.log('here');
                 }
             }
             else if(blockudokuBoard[y][x] != 2){
@@ -95,7 +105,10 @@ const Board = props => {
         }
     }
 
-    if(!validPlacement){
+    // console.log(numberofTilesHover); need to test to see what this does exactly 
+    // console.log(numberOfTiles)
+
+    if(!validPlacement || numberofTilesHover != numberOfTiles){
         for(var y = 0; y < blockudokuBoard.length; y++) {
             var blockudokuRow = blockudokuBoard[y];
             for(var x = 0; x < blockudokuRow.length; x++) {
@@ -108,10 +121,9 @@ const Board = props => {
 
 
     if(!isDragging && activeBlock != -1){
-        console.log(isDragging);
-        console.log(activeBlock);
         onResetBlock(activeBlock)
         onSetBoard(blockudokuBoard)
+        onCalculateCompletion();
     }
     
     let displayBoard = [];

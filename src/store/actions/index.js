@@ -6,5 +6,6 @@ export {
     setStarterPosition,
     setBoardPosition,
     setStarterNames,
-    setBoard
+    setBoard,
+    calculateCompletion
 } from './blockMoves';

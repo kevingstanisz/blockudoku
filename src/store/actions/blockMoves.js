@@ -58,10 +58,15 @@ export const setStarterNames = (starterArray) => {
 }
 
 export const setBoard = (boardArray) => {
-    //console.log('in action')
     return{
         type: actionTypes.SET_BOARD,
         boardArray: boardArray
+    }
+}
+
+export const calculateCompletion = () => {
+    return{
+        type: actionTypes.CALCULATE_COMPLETION,
     }
 }
 

@@ -48,6 +48,10 @@ const Board = props => {
         return activeBlock != -1 ? state.starterBlock[activeBlock].name  : 0
     });
 
+    const  starterHoverComplete = useSelector(state => {
+        return activeBlock != -1 ? state.starterBlock[activeBlock].completion  : 0
+    });
+
     const tileSize = useSelector(state => {
         return activeBlock != -1 ? state.boardPos.tileSize : 1
     });
@@ -125,13 +129,52 @@ const Board = props => {
         onSetBoard(blockudokuBoard)
         onCalculateCompletion();
     }
+
+    var hoverCompletionBoard = createArray(9,9);
+
+    // console.log(tileX + 2)
+    // console.log(tileY + 2)
+
+    if(starterHoverComplete != 0){
+        if(starterHoverComplete[tileY + 2][tileX + 2].column.length){
+            for(var i = 0; i < starterHoverComplete[tileY + 2][tileX + 2].column.length; i++){
+                for(j = 0; j < hoverCompletionBoard.length; j++){
+                    hoverCompletionBoard[j][starterHoverComplete[tileY + 2][tileX + 2].column[i]] = 1;
+                }
+            }
+        }
+
+        if(starterHoverComplete[tileY + 2][tileX + 2].row.length){
+            for(var i = 0; i < starterHoverComplete[tileY + 2][tileX + 2].row.length; i++){
+                for(j = 0; j < hoverCompletionBoard.length; j++){
+                    hoverCompletionBoard[starterHoverComplete[tileY + 2][tileX + 2].row[i]][j] = 1;
+                }
+            }
+        }
+
+        if(starterHoverComplete[tileY + 2][tileX + 2].square.length){
+            for(var i = 0; i < starterHoverComplete[tileY + 2][tileX + 2].square.length; i++){
+                let boxNumber = starterHoverComplete[tileY + 2][tileX + 2].square[i];
+                let boxRow = Math.floor(boxNumber / 3);
+                let boxColumn = boxNumber % 3;
+
+                for(var x = boxRow * 3; x < (boxRow + 1) * 3; x++) {
+                    for(var y = boxColumn * 3; y < (boxColumn + 1) * 3; y++) {
+                        console.log(x)
+                        console.log(y)
+                        hoverCompletionBoard[y][x] = 1; 
+                    }
+                }  
+            }
+        }
+    }
     
     let displayBoard = [];
 
     for(var i = 0; i < blockudokuBoard.length; i++) {
         var blockudokuRow = blockudokuBoard[i];
         for(var j = 0; j < blockudokuRow.length; j++) {
-            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {j} column = {i} isBoard = {true} topLeft = {i == 0 && j == 0 ? true : false} hoverOnTile = {blockudokuBoard[i][j] == 1 ? true: false} blockOnTile = {blockudokuBoard[i][j] == 2 ? true: false}/></td>)
+            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {j} column = {i} isBoard = {true} topLeft = {i == 0 && j == 0 ? true : false} hoverOnTile = {blockudokuBoard[i][j] == 1 ? true: false} blockOnTile = {blockudokuBoard[i][j] == 2 ? true: false} hoverComplete = {hoverCompletionBoard[i][j] ? true : false}/></td>)
         }
     }
 

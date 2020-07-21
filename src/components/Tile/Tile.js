@@ -64,6 +64,10 @@ const Tile = props => {
         attachedClasses.push(classes.PickedUp)
     }
 
+    if(props.hoverComplete){
+        attachedClasses.push(classes.HoverComplete)
+    }
+
     return (
         <div className = {attachedClasses.join(' ')}
             ref={el => {

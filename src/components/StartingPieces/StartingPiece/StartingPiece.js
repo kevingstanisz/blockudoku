@@ -24,6 +24,10 @@ const StartingPiece = props => {
         return state.activeBlock
     });
 
+    const hideBlock = useSelector(state => {
+        return state.starterBlock[props.id].placed
+    });
+
     const onPickUpBlock = ({clientX, clientY}, id) => dispatch(actions.pickUpBlock({clientX, clientY}, id));
     const onSetDownBlock = (id) => dispatch(actions.setDownBlock(id));
     const onMoveBlock = ({clientX, clientY}, id) => dispatch(actions.moveBlock({clientX, clientY}, id));
@@ -87,8 +91,14 @@ const StartingPiece = props => {
         finalDisplayBoard.push(<tr key = {'row' + j}>{displayBoard.slice(j*props.piece.length, (j + 1)*props.piece.length)}</tr>)
     }
 
+    let attachedClasses = [classes.Thirds];
+
+    if(hideBlock){
+        attachedClasses.push(classes.HidePiece)
+    }
+
     return(
-        <div className = {classes.Thirds} style = {styles} onMouseDown = {handleMouseDown}>
+        <div className = {attachedClasses.join(' ')} style = {styles} onMouseDown = {handleMouseDown}>
             <table className = {classes.PieceLayout}>
                 <tbody>
                     {finalDisplayBoard}

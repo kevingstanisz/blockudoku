@@ -7,5 +7,6 @@ export {
     setBoardPosition,
     setStarterNames,
     setBoard,
-    calculateCompletion
+    calculateCompletion,
+    updateScore
 } from './blockMoves';

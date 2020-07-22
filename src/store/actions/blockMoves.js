@@ -25,10 +25,17 @@ export const moveBlock = ({clientX, clientY}, id) => {
     }
 }
 
-export const resetBlock = (id) => {
+export const resetBlock = (id, addedScore) => {
+    let hideBlock = false
+
+    if(addedScore > 0){
+        hideBlock = true
+    }
+
     return{
         type: actionTypes.RESET_BLOCK,
-        id: id
+        id: id,
+        hideBlock: hideBlock
     }
 }
 
@@ -64,9 +71,16 @@ export const setBoard = (boardArray) => {
     }
 }
 
-export const calculateCompletion = () => {
+export const calculateCompletion = (boardArray) => {
     return{
         type: actionTypes.CALCULATE_COMPLETION,
+    }
+}
+
+export const updateScore = (addedScore) => {
+    return{
+        type: actionTypes.UPDATE_SCORE,
+        addedScore: addedScore
     }
 }
 

@@ -3,6 +3,7 @@ import classes from './Board.module.css'
 import createArray from '../../utilities/Create2DArray';
 import Tile from '../Tile/Tile'
 import StartingPieces from '../StartingPieces/StartingPieces'
+import Score from '../Score/Score'
 import {useDispatch, useSelector} from 'react-redux';
 import {setBlock} from '../../utilities/RandomStartingBlock';
 import * as actions from '../../store/actions/index';
@@ -16,8 +17,9 @@ const Board = props => {
 
     const onSetBoard = (boardArray) => dispatch(actions.setBoard(boardArray))
     //const onSetDownBlock = (id) => dispatch(actions.setDownBlock(id));
-    const onResetBlock = (id) => dispatch(actions.resetBlock(id));
+    const onResetBlock = (id, addScore) => dispatch(actions.resetBlock(id, addScore));
     const onCalculateCompletion = () => dispatch(actions.calculateCompletion());
+    const onAddScore = (addScore) => dispatch(actions.updateScore(addScore));
 
     const activeBlock = useSelector(state => {
         return state.activeBlock
@@ -123,20 +125,15 @@ const Board = props => {
         }
     }
 
-
-    if(!isDragging && activeBlock != -1){
-        onResetBlock(activeBlock)
-        onSetBoard(blockudokuBoard)
-        onCalculateCompletion();
-    }
-
     var hoverCompletionBoard = createArray(9,9);
+    let totalRemoved = 0;
 
     // console.log(tileX + 2)
     // console.log(tileY + 2)
 
-    if(starterHoverComplete != 0){
+    if(starterHoverComplete != 0 && tileY >= -2 && tileY <= 11 && tileX >= -2 && tileX <= 11){
         if(starterHoverComplete[tileY + 2][tileX + 2].column.length){
+            totalRemoved += starterHoverComplete[tileY + 2][tileX + 2].column.length;
             for(var i = 0; i < starterHoverComplete[tileY + 2][tileX + 2].column.length; i++){
                 for(j = 0; j < hoverCompletionBoard.length; j++){
                     hoverCompletionBoard[j][starterHoverComplete[tileY + 2][tileX + 2].column[i]] = 1;
@@ -145,6 +142,7 @@ const Board = props => {
         }
 
         if(starterHoverComplete[tileY + 2][tileX + 2].row.length){
+            totalRemoved += starterHoverComplete[tileY + 2][tileX + 2].row.length;
             for(var i = 0; i < starterHoverComplete[tileY + 2][tileX + 2].row.length; i++){
                 for(j = 0; j < hoverCompletionBoard.length; j++){
                     hoverCompletionBoard[starterHoverComplete[tileY + 2][tileX + 2].row[i]][j] = 1;
@@ -153,6 +151,7 @@ const Board = props => {
         }
 
         if(starterHoverComplete[tileY + 2][tileX + 2].square.length){
+            totalRemoved += starterHoverComplete[tileY + 2][tileX + 2].square.length;
             for(var i = 0; i < starterHoverComplete[tileY + 2][tileX + 2].square.length; i++){
                 let boxNumber = starterHoverComplete[tileY + 2][tileX + 2].square[i];
                 let boxRow = Math.floor(boxNumber / 3);
@@ -167,6 +166,43 @@ const Board = props => {
                 }  
             }
         }
+    }
+
+    if(!isDragging && activeBlock != -1){
+        let addScore = 0;
+        if(numberofTilesHover == numberOfTiles){
+            addScore = numberOfTiles
+        }
+
+        switch(totalRemoved){
+            case 1:
+                addScore += 18;
+                break;
+            case 2:
+                addScore += 2*18;
+                break;
+            case 3:
+                addScore += 6*18;
+                break;
+            default:
+                addScore += 0;
+        }
+
+        onAddScore(addScore);
+
+        if(addScore > 18) {
+            for(var i = 0; i < blockudokuBoard.length; i++) {
+                var blockudokuRow = blockudokuBoard[i];
+                for(var j = 0; j < blockudokuRow.length; j++) {
+                    //2 is placed - 1 is hover - need to do 2 - 2 to get empty
+                    blockudokuBoard[i][j] -= hoverCompletionBoard[i][j]*2
+                }
+            }
+        }
+
+        onResetBlock(activeBlock, addScore)
+        onSetBoard(blockudokuBoard)
+        onCalculateCompletion();
     }
     
     let displayBoard = [];
@@ -186,6 +222,7 @@ const Board = props => {
 
     return (
         <React.Fragment>
+            <Score></Score>
             <table className = {classes.BoardStyle}>
                 <tbody className = {classes.TableBody}>
                     {finalDisplayBoard}

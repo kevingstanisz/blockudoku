@@ -16,7 +16,8 @@ const intialState = {
         startingPos: POSITION, tileSize: 0
     },
     incrementer: 0,
-    blockudokuBoard: createArray(9, 9)   
+    blockudokuBoard: createArray(9, 9),
+    score: 0   
 }
 
 const placeable = (gridX, gridY, piece, board) => {
@@ -164,7 +165,7 @@ const reducer = (state = intialState, action) => {
                 ...state,
                 activeBlock: -1,
                 starterBlock: state.starterBlock.map(
-                    (starterBlock, i) => i === action.id ? {...starterBlock, translation: POSITION}
+                    (starterBlock, i) => i === action.id ? {...starterBlock, translation: POSITION, placed: action.hideBlock || state.starterBlock[action.id].placed}
                                                         :starterBlock
                     )
             };
@@ -228,6 +229,12 @@ const reducer = (state = intialState, action) => {
                     (starterBlock, i) => i > -1 ? {...starterBlock, completion: newCompletion[i]}
                                                         :starterBlock
                     )
+            };
+
+        case actionTypes.UPDATE_SCORE: 
+            return{
+                ...state,
+                score: state.score + action.addedScore
             };
 
         default: 

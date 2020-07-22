@@ -16,3 +16,7 @@
     height: 300px;
     float: left;
 }
+
+.HidePiece{
+    visibility: hidden;
+}

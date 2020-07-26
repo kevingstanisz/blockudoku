@@ -8,5 +8,6 @@ export {
     setStarterNames,
     setBoard,
     calculateCompletion,
-    updateScore
+    updateScore,
+    blocksGenerated
 } from './blockMoves';

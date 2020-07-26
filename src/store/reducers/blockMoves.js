@@ -17,7 +17,9 @@ const intialState = {
     },
     incrementer: 0,
     blockudokuBoard: createArray(9, 9),
-    score: 0   
+    score: 0, 
+    generateNewBlocks: true,
+    endOfGame: false
 }
 
 const placeable = (gridX, gridY, piece, board) => {
@@ -161,8 +163,26 @@ const reducer = (state = intialState, action) => {
             };
         
         case actionTypes.RESET_BLOCK: 
+
+            let numberBlocksUsed = 0;
+            for(let i = 0; i < state.starterBlock.length; i++){
+                if(state.starterBlock[i].placed){
+                    numberBlocksUsed++
+                }
+            }
+
+            if(action.hideBlock){
+                numberBlocksUsed++
+            }
+
+            let newBlocks = false;
+            if(numberBlocksUsed == state.starterBlock.length){
+                newBlocks = true;
+            }
+
             return{
                 ...state,
+                generateNewBlocks: newBlocks,
                 activeBlock: -1,
                 starterBlock: state.starterBlock.map(
                     (starterBlock, i) => i === action.id ? {...starterBlock, translation: POSITION, placed: action.hideBlock || state.starterBlock[action.id].placed}
@@ -235,6 +255,16 @@ const reducer = (state = intialState, action) => {
             return{
                 ...state,
                 score: state.score + action.addedScore
+            };
+
+        case actionTypes.BLOCKS_GENERATED: 
+            return{
+                ...state,
+                generateNewBlocks: false,
+                starterBlock: state.starterBlock.map(
+                    (starterBlock, i) => i > -1 ? {...starterBlock, placed: false}
+                                                        :starterBlock
+                    )
             };
 
         default: 

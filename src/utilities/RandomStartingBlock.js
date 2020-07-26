@@ -417,16 +417,16 @@ export function setBlock(chosenBlock){
 // smalltopRightCorner.push([0, 0, 1, 0]);
 // smalltopRightCorner.push([0, 0, 0, 0]);
 
-let allBlocks = ['bigBottomLeftCorner','bigBottomRightCorner','bigTopLeftCorner','bigTopRightCorner','fiveRight','fiveRight','fiveUp','fourRight','fourStaircaseDown','fourStaircaseUp','fourUp','lBottom','lLeft','lRight','lTop','one','plus','smallBottomLeftCorner','smallBottomRightCorner','smallTDown','smallTLeft','smallTopLeftCorner','smallTopRightCorner','smallTRight','smallTUp','square','tDown','threeRight','threeStaircaseDown','threeStaircaseUp','threeUp','tLeft','tRight','tUp','twoAndTwoDown','twoAndTwoLeft','twoAndTwoRight','twoAndTwoUp','twoRight','twoUp','uDown','uLeft','uRight','uUp']
-
-let chosenBlocks = []
-
-for (var i = 0; i < 3; i++) {
-    let randomBlock = allBlocks[Math.floor(Math.random() * allBlocks.length)]
-    chosenBlocks.push({block: setBlock(randomBlock), name: randomBlock})
-}
-
 function RandomStarter (){
+    let allBlocks = ['bigBottomLeftCorner','bigBottomRightCorner','bigTopLeftCorner','bigTopRightCorner','fiveRight','fiveRight','fiveUp','fourRight','fourStaircaseDown','fourStaircaseUp','fourUp','lBottom','lLeft','lRight','lTop','one','plus','smallBottomLeftCorner','smallBottomRightCorner','smallTDown','smallTLeft','smallTopLeftCorner','smallTopRightCorner','smallTRight','smallTUp','square','tDown','threeRight','threeStaircaseDown','threeStaircaseUp','threeUp','tLeft','tRight','tUp','twoAndTwoDown','twoAndTwoLeft','twoAndTwoRight','twoAndTwoUp','twoRight','twoUp','uDown','uLeft','uRight','uUp']
+
+    let chosenBlocks = []
+
+    for (var i = 0; i < 3; i++) {
+        let randomBlock = allBlocks[Math.floor(Math.random() * allBlocks.length)]
+        chosenBlocks.push({block: setBlock(randomBlock), name: randomBlock})
+    }
+
     return chosenBlocks; 
 }
 

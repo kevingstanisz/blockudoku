@@ -29,6 +29,10 @@ const Board = props => {
         return state.blockudokuBoard;
     }); 
 
+    const generateNewBlocks = useSelector(state => {
+        return state.generateNewBlocks;
+    }); 
+
     const isDragging = useSelector(state => {
         return activeBlock != -1 ? state.starterBlock[activeBlock].isDragging : false
     }); 
@@ -57,6 +61,7 @@ const Board = props => {
     const tileSize = useSelector(state => {
         return activeBlock != -1 ? state.boardPos.tileSize : 1
     });
+    
 
     let tileX  = Math.round((translation.x - starterOffsetX) / tileSize);
     let tileY  = Math.round((translation.y - starterOffsetY) / tileSize);
@@ -228,7 +233,7 @@ const Board = props => {
                     {finalDisplayBoard}
                 </tbody>
             </table>
-            <StartingPieces newBlocks = {false}/>
+            <StartingPieces/>
         </React.Fragment>
     );
 }

@@ -84,3 +84,9 @@ export const updateScore = (addedScore) => {
     }
 }
 
+export const blocksGenerated = () => {
+    return{
+        type: actionTypes.BLOCKS_GENERATED,
+    }
+}
+

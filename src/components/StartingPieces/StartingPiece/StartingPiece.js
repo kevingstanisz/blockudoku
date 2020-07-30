@@ -28,6 +28,10 @@ const StartingPiece = props => {
         return state.starterBlock[props.id].placed
     });
 
+    const blockPlaceable = useSelector(state => {
+        return state.starterBlock[props.id].placeable
+    });
+
     const onPickUpBlock = ({clientX, clientY}, id) => dispatch(actions.pickUpBlock({clientX, clientY}, id));
     const onSetDownBlock = (id) => dispatch(actions.setDownBlock(id));
     const onMoveBlock = ({clientX, clientY}, id) => dispatch(actions.moveBlock({clientX, clientY}, id));
@@ -80,6 +84,7 @@ const StartingPiece = props => {
                     emptyBlock = {pieceRow[j] ? false : true} 
                     nextToBlock = {props.id == activeBlock ? false : pieceRow[j] || j == 0 ? false : pieceRow[j-1] ? true : false} 
                     belowBlock = {props.id == activeBlock ? false : pieceRow[j] || i == 0 ? false : props.piece[i - 1][j] ? true : false}
+                    notPlaceable = {!pieceRow[j] ? false : !blockPlaceable ? true : false}
                 />
             </td>)
         }

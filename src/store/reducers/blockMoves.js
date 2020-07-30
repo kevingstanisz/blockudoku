@@ -7,9 +7,9 @@ const POSITION = {x: 0, y: 0}
 
 const intialState = {
     starterBlock : [
-        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: '', placed: false, completion: makeObject(createArray(13, 13))},
-        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: '', placed: false, completion: makeObject(createArray(13, 13))},
-        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: '', placed: false, completion: makeObject(createArray(13, 13))}
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: '', placed: false, placeable: false, completion: makeObject(createArray(13, 13))},
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: '', placed: false, placeable: false, completion: makeObject(createArray(13, 13))},
+        {isDragging: false, origin: POSITION, translation: POSITION, startingPos: POSITION, name: '', placed: false, placeable: false, completion: makeObject(createArray(13, 13))}
     ],
     activeBlock: -1,
     boardPos : {
@@ -226,14 +226,18 @@ const reducer = (state = intialState, action) => {
 
         case actionTypes.CALCULATE_COMPLETION:
             let newCompletion = [];
+            let placeablePieces = [];
+            let placeablePiece = false;
 
             for(var pieceNumber = 0; pieceNumber < state.starterBlock.length; pieceNumber++){
                 newCompletion.push(makeObject(createArray(13, 13)));
                 let tempPiece = setBlock(state.starterBlock[pieceNumber].name);
+                placeablePiece = false;
 
                 for(var y = -2; y < 7; y++) {
                     for(var x = -2; x < 7; x++) {
                         if(placeable(x, y, tempPiece, state.blockudokuBoard)){
+                            placeablePiece = true;
                             newCompletion[pieceNumber][y + 2][x + 2].row = (completeRow(x, y, tempPiece, state.blockudokuBoard));
                             newCompletion[pieceNumber][y + 2][x + 2].column = (completeColumn(x, y, tempPiece, state.blockudokuBoard));
                             newCompletion[pieceNumber][y + 2][x + 2].square = (completeBox(x, y, tempPiece, state.blockudokuBoard));
@@ -241,12 +245,13 @@ const reducer = (state = intialState, action) => {
                     }
                 }
 
+                placeablePieces.push(placeablePiece);
             }
 
             return{
                 ...state,
                 starterBlock: state.starterBlock.map(
-                    (starterBlock, i) => i > -1 ? {...starterBlock, completion: newCompletion[i]}
+                    (starterBlock, i) => i > -1 ? {...starterBlock, completion: newCompletion[i], placeable: placeablePieces[i]}
                                                         :starterBlock
                     )
             };

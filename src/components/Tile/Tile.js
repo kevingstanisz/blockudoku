@@ -68,6 +68,10 @@ const Tile = props => {
         attachedClasses.push(classes.HoverComplete)
     }
 
+    if(props.notPlaceable) {
+        attachedClasses.push(classes.NotPlaceable)
+    }
+
     return (
         <div className = {attachedClasses.join(' ')}
             ref={el => {

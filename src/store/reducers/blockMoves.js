@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes'
 import startingPiece from '../../components/StartingPieces/StartingPieces'
 import createArray, {makeObject} from '../../utilities/Create2DArray';
 import {setBlock} from '../../utilities/RandomStartingBlock'
+import { setStarterNames } from '../actions';
 
 const POSITION = {x: 0, y: 0}
 
@@ -15,7 +16,6 @@ const intialState = {
     boardPos : {
         startingPos: POSITION, tileSize: 0
     },
-    incrementer: 0,
     blockudokuBoard: createArray(9, 9),
     score: 0, 
     generateNewBlocks: true,
@@ -228,24 +228,29 @@ const reducer = (state = intialState, action) => {
             let newCompletion = [];
             let placeablePieces = [];
             let placeablePiece = false;
+            let endGame = true;
 
             for(var pieceNumber = 0; pieceNumber < state.starterBlock.length; pieceNumber++){
                 newCompletion.push(makeObject(createArray(13, 13)));
-                let tempPiece = setBlock(state.starterBlock[pieceNumber].name);
-                placeablePiece = false;
+                if(!state.starterBlock[pieceNumber].placed){
+                    let tempPiece = setBlock(state.starterBlock[pieceNumber].name);
+                    placeablePiece = false;
 
-                for(var y = -2; y < 7; y++) {
-                    for(var x = -2; x < 7; x++) {
-                        if(placeable(x, y, tempPiece, state.blockudokuBoard)){
-                            placeablePiece = true;
-                            newCompletion[pieceNumber][y + 2][x + 2].row = (completeRow(x, y, tempPiece, state.blockudokuBoard));
-                            newCompletion[pieceNumber][y + 2][x + 2].column = (completeColumn(x, y, tempPiece, state.blockudokuBoard));
-                            newCompletion[pieceNumber][y + 2][x + 2].square = (completeBox(x, y, tempPiece, state.blockudokuBoard));
+                    for(var y = -2; y < 7; y++) {
+                        for(var x = -2; x < 7; x++) {
+                            if(placeable(x, y, tempPiece, state.blockudokuBoard)){
+                                placeablePiece = true;
+                                endGame = false;
+                                newCompletion[pieceNumber][y + 2][x + 2].row = (completeRow(x, y, tempPiece, state.blockudokuBoard));
+                                newCompletion[pieceNumber][y + 2][x + 2].column = (completeColumn(x, y, tempPiece, state.blockudokuBoard));
+                                newCompletion[pieceNumber][y + 2][x + 2].square = (completeBox(x, y, tempPiece, state.blockudokuBoard));
+                            }
                         }
                     }
                 }
-
+                    
                 placeablePieces.push(placeablePiece);
+                
             }
 
             return{
@@ -253,7 +258,8 @@ const reducer = (state = intialState, action) => {
                 starterBlock: state.starterBlock.map(
                     (starterBlock, i) => i > -1 ? {...starterBlock, completion: newCompletion[i], placeable: placeablePieces[i]}
                                                         :starterBlock
-                    )
+                    ),
+                endOfGame: endGame
             };
 
         case actionTypes.UPDATE_SCORE: 
@@ -270,6 +276,15 @@ const reducer = (state = intialState, action) => {
                     (starterBlock, i) => i > -1 ? {...starterBlock, placed: false}
                                                         :starterBlock
                     )
+            };
+
+        case actionTypes.NEW_GAME: 
+            return{
+                ...state,
+                blockudokuBoard: action.boardArray,
+                endOfGame: false,
+                generateNewBlocks: true,
+                score: 0
             };
 
         default: 

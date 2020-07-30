@@ -9,5 +9,6 @@ export {
     setBoard,
     calculateCompletion,
     updateScore,
-    blocksGenerated
+    blocksGenerated,
+    newGame
 } from './blockMoves';

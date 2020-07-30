@@ -9,3 +9,4 @@ export const SET_BOARD = 'SET_BOARD';
 export const CALCULATE_COMPLETION = 'CALCULATE_COMPLETION';
 export const UPDATE_SCORE = 'UPDATE_SCORE';
 export const BLOCKS_GENERATED = 'BLOCKS_GENERATED';
+export const NEW_GAME = 'NEW_GAME';

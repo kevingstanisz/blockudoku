@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes'
+import createArray from '../../utilities/Create2DArray';
 
 export const pickUpBlock = ({clientX, clientY}, id) => {
     return{
@@ -87,6 +88,13 @@ export const updateScore = (addedScore) => {
 export const blocksGenerated = () => {
     return{
         type: actionTypes.BLOCKS_GENERATED,
+    }
+}
+
+export const newGame = () => {
+    return{
+        type: actionTypes.NEW_GAME,
+        boardArray: createArray(9,9)
     }
 }
 

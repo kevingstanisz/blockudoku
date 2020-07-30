@@ -4,6 +4,8 @@ import createArray from '../../utilities/Create2DArray';
 import Tile from '../Tile/Tile'
 import StartingPieces from '../StartingPieces/StartingPieces'
 import Score from '../Score/Score'
+import Modal from '../UI/Modal/Modal'
+import Results from '../Results/Results';
 import {useDispatch, useSelector} from 'react-redux';
 import {setBlock} from '../../utilities/RandomStartingBlock';
 import * as actions from '../../store/actions/index';
@@ -20,6 +22,11 @@ const Board = props => {
     const onResetBlock = (id, addScore) => dispatch(actions.resetBlock(id, addScore));
     const onCalculateCompletion = () => dispatch(actions.calculateCompletion());
     const onAddScore = (addScore) => dispatch(actions.updateScore(addScore));
+    const onNewGame = () => dispatch(actions.newGame());
+
+    const endGame = useSelector(state => {
+        return state.endOfGame;
+    }); 
 
     const activeBlock = useSelector(state => {
         return state.activeBlock
@@ -227,6 +234,8 @@ const Board = props => {
 
     return (
         <React.Fragment>
+            {/* <Modal show = {endGame} modalClosed = {this.purchaseCancelHandler}>{orderSummary}</Modal> */}
+            <Modal show = {endGame}><Results newGame = {onNewGame}></Results></Modal>
             <Score></Score>
             <table className = {classes.BoardStyle}>
                 <tbody className = {classes.TableBody}>

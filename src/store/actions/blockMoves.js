@@ -102,7 +102,7 @@ export const newGame = () => {
 export const storeResults = (results) => {
     return dispatch => {
         dispatch(newGame());
-        axios.post('/orders.json', results)
+        axios.post('/results.json', results)
             .then(response => {
                 console.log('hi');
                 //dispatch(purchaseBurgerSuccess(response.data, orderData));
@@ -111,5 +111,41 @@ export const storeResults = (results) => {
                 console.log('hello');
                 //dispatch(purchaseBurgerFail(error));
             });
+    }
+}
+
+export const fetchResultsSuccess = (results) => {
+    return{
+        type: actionTypes.FETCH_RESULTS_SUCCESS,
+        results: results
+    }
+}
+
+export const fetchResults = () => {
+    return dispatch => {
+        //dispatch(fetchOrdersStart());
+        axios.get('/results.json')
+        .then(res => {
+            const fetchResults = [];
+            for (let key in res.data){
+                fetchResults.push({
+                    ...res.data[key],
+                    id: key
+                });
+            }
+
+            fetchResults.sort((a, b) => {
+                if (a.score > b.score)
+                    return -1;
+                if (a.score < b.score)
+                    return 1;
+                return 0;
+            });
+            dispatch(fetchResultsSuccess(fetchResults))
+        })
+        .catch(err => {
+            console.log(err);
+            //dispatch(fetchOrdersFail(err))
+        });
     }
 }

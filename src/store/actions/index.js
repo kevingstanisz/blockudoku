@@ -11,5 +11,7 @@ export {
     updateScore,
     blocksGenerated,
     newGame,
-    storeResults
+    storeResults,
+    fetchResults,
+    fetchResultsSuccess
 } from './blockMoves';

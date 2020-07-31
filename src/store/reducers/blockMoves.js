@@ -19,7 +19,8 @@ const intialState = {
     blockudokuBoard: createFullArray(9, 9),
     score: 0, 
     generateNewBlocks: true,
-    endOfGame: false
+    endOfGame: false,
+    results: [] 
 }
 
 const placeable = (gridX, gridY, piece, board) => {
@@ -285,6 +286,12 @@ const reducer = (state = intialState, action) => {
                 endOfGame: false,
                 generateNewBlocks: true,
                 score: 0
+            };
+
+            case actionTypes.FETCH_RESULTS_SUCCESS: 
+            return{
+                ...state,
+                results: action.results
             };
 
         default: 

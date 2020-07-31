@@ -9,10 +9,19 @@ const Results = props => {
 
     const dispatch = useDispatch();
     const onStoreResults = (order) => dispatch(actions.storeResults(order));
+    const onFetchResults = () => dispatch(actions.fetchResults());
 
     const finalScore = useSelector(state => {
         return state.score;
     }); 
+
+    const results = useSelector(state => {
+        return state.results;
+    }); 
+
+    if(!results.length){
+        onFetchResults();
+    }
 
     const [authForm, setAuthForm] = useState({
             name:{

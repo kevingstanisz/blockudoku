@@ -10,5 +10,6 @@ export {
     calculateCompletion,
     updateScore,
     blocksGenerated,
-    newGame
+    newGame,
+    storeResults
 } from './blockMoves';

@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import createArray from '../../utilities/Create2DArray';
+import axios from '../../axios-standings';
 
 export const pickUpBlock = ({clientX, clientY}, id) => {
     return{
@@ -98,3 +99,17 @@ export const newGame = () => {
     }
 }
 
+export const storeResults = (results) => {
+    return dispatch => {
+        dispatch(newGame());
+        axios.post('/orders.json', results)
+            .then(response => {
+                console.log('hi');
+                //dispatch(purchaseBurgerSuccess(response.data, orderData));
+            })
+            .catch(error => {
+                console.log('hello');
+                //dispatch(purchaseBurgerFail(error));
+            });
+    }
+}

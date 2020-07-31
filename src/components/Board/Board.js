@@ -9,6 +9,7 @@ import Results from '../Results/Results';
 import {useDispatch, useSelector} from 'react-redux';
 import {setBlock} from '../../utilities/RandomStartingBlock';
 import * as actions from '../../store/actions/index';
+import axios from '../../axios-standings';
 
 const Board = props => {
 
@@ -235,7 +236,8 @@ const Board = props => {
     return (
         <React.Fragment>
             {/* <Modal show = {endGame} modalClosed = {this.purchaseCancelHandler}>{orderSummary}</Modal> */}
-            <Modal show = {endGame}><Results newGame = {onNewGame}></Results></Modal>
+            {/* <Modal show = {endGame}><Results newGame = {onNewGame}></Results></Modal> */}
+            <Modal show = {endGame}><Results></Results></Modal>
             <Score></Score>
             <table className = {classes.BoardStyle}>
                 <tbody className = {classes.TableBody}>

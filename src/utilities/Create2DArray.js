@@ -14,5 +14,10 @@ export function makeObject(array) {
     return array;
 }
 
+export function createFullArray(length) {
+    let array = Array(length).fill().map(() => Array(length).fill(1));
+
+    return array;
+}
 
 export default createArray;

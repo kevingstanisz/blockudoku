@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 import startingPiece from '../../components/StartingPieces/StartingPieces'
-import createArray, {makeObject} from '../../utilities/Create2DArray';
+import createArray, {makeObject, createFullArray} from '../../utilities/Create2DArray';
 import {setBlock} from '../../utilities/RandomStartingBlock'
 import { setStarterNames } from '../actions';
 
@@ -16,7 +16,7 @@ const intialState = {
     boardPos : {
         startingPos: POSITION, tileSize: 0
     },
-    blockudokuBoard: createArray(9, 9),
+    blockudokuBoard: createFullArray(9, 9),
     score: 0, 
     generateNewBlocks: true,
     endOfGame: false

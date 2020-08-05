@@ -113,6 +113,8 @@ export const storeResults = (results) => {
                     localStorage.setItem("highscore", JSON.stringify(response.data.name));
                 }
                 localStorage.setItem("lastscore", JSON.stringify(response.data.name));
+
+                console.log(response)
                 localStorage.setItem("name", JSON.stringify(results.name));
                 dispatch(fetchResults());
             })

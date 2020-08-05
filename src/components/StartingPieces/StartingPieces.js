@@ -30,24 +30,17 @@ const StartingPieces = props => {
 
     let newPieces = new Array(starterPieces.length)
     if(generateNewBlocks){
-        console.log(stateBlockudokuBoard)
-        if(stateBlockudokuBoard.some(function(arr) {
+        newPieces = randomStartingBlock();
+        onSetStarterNames(newPieces);
+        onBlocksGenerated();
+
+        if(!(stateBlockudokuBoard.some(function(arr) {
             return arr.some(item => item !== 0)
-        })){
-            console.log("anytihng here")
-            newPieces = randomStartingBlock();
-            onSetStarterNames(newPieces);
-            onBlocksGenerated();
-            onCalculateCompletion();
-        }
-        else{
-            newPieces = randomStartingBlock();
-            onSetStarterNames(newPieces);
-            onBlocksGenerated();
-            console.log(JSON.parse(localStorage.getItem("board")));
+        }) || (localStorage.getItem("board") === null))){
             onResumeOldGame();
-            onCalculateCompletion();
         }
+
+        onCalculateCompletion();
     }
 
     return(

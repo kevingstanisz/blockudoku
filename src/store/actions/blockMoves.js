@@ -93,6 +93,11 @@ export const blocksGenerated = () => {
 }
 
 export const newGame = () => {
+    localStorage.removeItem("board");
+    localStorage.removeItem("starters");
+    localStorage.removeItem("score");
+
+
     return{
         type: actionTypes.NEW_GAME,
         boardArray: createArray(9,9)
@@ -104,7 +109,11 @@ export const storeResults = (results) => {
         dispatch(newGame());
         axios.post('/results.json', results)
             .then(response => {
-                console.log('hi');
+                if(results.score > JSON.parse(localStorage.getItem("highscore"))){
+                    localStorage.setItem("highscore", JSON.stringify(response.data.name));
+                }
+                localStorage.setItem("lastscore", JSON.stringify(response.data.name));
+                localStorage.setItem("name", JSON.stringify(results.name));
                 dispatch(fetchResults());
             })
             .catch(error => {

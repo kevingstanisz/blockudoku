@@ -24,15 +24,15 @@
 } 
 
 .LightGrey {
-    background-color: lightgrey;
+    background-color: #e1e1e7;
 }
 
 .DarkGrey {
-    background-color: darkgray;
+    background-color: #cacad0;
 }
 
 .TableHeader {
-    background-color: black;
+    background-color: #161617;
     color: white
 }
 

@@ -17,7 +17,7 @@ const Layout = props => {
     // }
 
     return (
-        <React.Fragment>
+        <div className = {classes.WholePage}>
             <Toolbar
                  />
             <SideDrawer
@@ -25,7 +25,7 @@ const Layout = props => {
             <main className={classes.Content}>
                 {props.children}
             </main>
-        </React.Fragment>
+        </div>
     )
 }
 

@@ -32,6 +32,10 @@ const Tile = props => {
         attachedClasses.push(classes.NoBottomBorder)
     }
 
+    if(props.colorPattern) {
+        attachedClasses.push(classes.ColorPattern)
+    }
+
     if(props.blockOnTile){
         attachedClasses.push(classes.BlockOnTile)
     }

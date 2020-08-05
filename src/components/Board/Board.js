@@ -223,7 +223,11 @@ const Board = props => {
     for(var i = 0; i < blockudokuBoard.length; i++) {
         var blockudokuRow = blockudokuBoard[i];
         for(var j = 0; j < blockudokuRow.length; j++) {
-            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {j} column = {i} isBoard = {true} topLeft = {i == 0 && j == 0 ? true : false} hoverOnTile = {blockudokuBoard[i][j] == 1 ? true: false} blockOnTile = {blockudokuBoard[i][j] == 2 ? true: false} hoverComplete = {hoverCompletionBoard[i][j] ? true : false}/></td>)
+            displayBoard.push(<td key = {'' + i + '' + j}><Tile row = {j} column = {i} isBoard = {true} topLeft = {i == 0 && j == 0 ? true : false} 
+            colorPattern = {(i < 3 && j > 2 && j < 6) || (i > 5 && j > 2 && j < 6) || (j < 3 && i > 2 && i < 6) || (j > 5 && i > 2 && i < 6) ? true : false} 
+            hoverOnTile = {blockudokuBoard[i][j] == 1 ? true: false} 
+            blockOnTile = {blockudokuBoard[i][j] == 2 ? true: false} 
+            hoverComplete = {hoverCompletionBoard[i][j] ? true : false}/></td>)
         }
     }
 

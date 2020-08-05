@@ -105,7 +105,7 @@ export const storeResults = (results) => {
         axios.post('/results.json', results)
             .then(response => {
                 console.log('hi');
-                //dispatch(purchaseBurgerSuccess(response.data, orderData));
+                dispatch(fetchResults());
             })
             .catch(error => {
                 console.log('hello');

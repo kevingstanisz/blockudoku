@@ -1,3 +1,11 @@
+.WholePage {
+    height: 100vh;
+    overflow:hidden;
+    background-color: #f8f8ff;
+}
+
 .Content {
     margin-top: 72px;
+    background-color: #f8f8ff;
 }
+

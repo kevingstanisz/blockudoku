@@ -4,13 +4,21 @@ import logo from './logo.svg';
 import './App.css';
 import Board from './components/Board/Board';
 import Leaderboard from './components/Leaderboard/Leaderboard';
+import Layout from './hoc/Layout/Layout';
 
 function App() {
-  return (
+
+  let routes = (
     <Switch>
       <Route path = '/leaderboard' component={Leaderboard} />
       <Route path = '/' component={Board} />
     </Switch>
+  );
+
+  return (
+    <Layout>
+      {routes}
+    </Layout>
   );
 }
 

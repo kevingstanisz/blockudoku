@@ -25,7 +25,7 @@ const Leaderboard = props => {
                     name={"Player"}
                     score={"Score"} />
 
-            {results.map( (rslt, index) => (
+            {results.slice(0, 10).map( (rslt, index) => (
                 <LeaderCard
                     key={rslt.id}
                     place={index + 1}

@@ -19,12 +19,12 @@ const LeaderCard = (props) => {
 
     return(
         <div className = {attachedClasses.join(' ')}>
-            <table>
+            <table className = {classes.CenterVertical}>
                 <tbody>
                     <tr>
-                        <td>{props.place}</td>
-                        <td>{props.name}</td>
-                        <td>{props.score}</td>
+                        <td className = {classes.FirstChild}>{props.place}</td>
+                        <td className = {classes.SecondChild}>{props.name}</td>
+                        <td className = {classes.ThirdChild}>{props.score}</td>
                     </tr>
                 </tbody>
             </table>

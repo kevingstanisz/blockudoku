@@ -13,5 +13,6 @@ export {
     newGame,
     storeResults,
     fetchResults,
-    fetchResultsSuccess
+    fetchResultsSuccess,
+    resumeOldGame
 } from './blockMoves';

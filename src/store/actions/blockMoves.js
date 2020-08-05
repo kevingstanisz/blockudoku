@@ -73,7 +73,7 @@ export const setBoard = (boardArray) => {
     }
 }
 
-export const calculateCompletion = (boardArray) => {
+export const calculateCompletion = () => {
     return{
         type: actionTypes.CALCULATE_COMPLETION,
     }
@@ -147,5 +147,11 @@ export const fetchResults = () => {
             console.log(err);
             //dispatch(fetchOrdersFail(err))
         });
+    }
+}
+
+export const resumeOldGame = () => {
+    return{
+        type: actionTypes.RESUME_OLD_GAME,
     }
 }

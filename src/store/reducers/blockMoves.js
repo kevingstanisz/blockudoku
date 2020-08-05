@@ -226,6 +226,11 @@ const reducer = (state = intialState, action) => {
             };
 
         case actionTypes.CALCULATE_COMPLETION:
+            console.log("set local storage")
+            localStorage.setItem("board", JSON.stringify(state.blockudokuBoard));
+            localStorage.setItem("starters", JSON.stringify(state.starterBlock));
+            localStorage.setItem("score", JSON.stringify(state.score));
+
             let newCompletion = [];
             let placeablePieces = [];
             let placeablePiece = false;
@@ -288,10 +293,18 @@ const reducer = (state = intialState, action) => {
                 score: 0
             };
 
-            case actionTypes.FETCH_RESULTS_SUCCESS: 
+        case actionTypes.FETCH_RESULTS_SUCCESS: 
             return{
                 ...state,
                 results: action.results
+            };
+
+        case actionTypes.RESUME_OLD_GAME: 
+            return{
+                ...state,
+                blockudokuBoard: JSON.parse(localStorage.getItem("board")),
+                starterBlock: JSON.parse(localStorage.getItem("starters")),
+                score: JSON.parse(localStorage.getItem("score")),
             };
 
         default: 

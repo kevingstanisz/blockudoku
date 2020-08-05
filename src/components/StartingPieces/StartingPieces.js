@@ -14,6 +14,7 @@ const StartingPieces = props => {
     const onSetStarterNames = (starterArray) => dispatch(actions.setStarterNames(starterArray))
     const onBlocksGenerated = () => dispatch(actions.blocksGenerated())
     const onCalculateCompletion = () => dispatch(actions.calculateCompletion());
+    const onResumeOldGame = () => dispatch(actions.resumeOldGame());
 
     const generateNewBlocks = useSelector(state => {
         return state.generateNewBlocks;
@@ -23,12 +24,30 @@ const StartingPieces = props => {
         return state.starterBlock;
     }); 
 
+    const stateBlockudokuBoard = useSelector(state => {
+        return state.blockudokuBoard;
+    });
+
     let newPieces = new Array(starterPieces.length)
     if(generateNewBlocks){
-        newPieces = randomStartingBlock();
-        onSetStarterNames(newPieces);
-        onBlocksGenerated();
-        onCalculateCompletion();
+        console.log(stateBlockudokuBoard)
+        if(stateBlockudokuBoard.some(function(arr) {
+            return arr.some(item => item !== 0)
+        })){
+            console.log("anytihng here")
+            newPieces = randomStartingBlock();
+            onSetStarterNames(newPieces);
+            onBlocksGenerated();
+            onCalculateCompletion();
+        }
+        else{
+            newPieces = randomStartingBlock();
+            onSetStarterNames(newPieces);
+            onBlocksGenerated();
+            console.log(JSON.parse(localStorage.getItem("board")));
+            onResumeOldGame();
+            onCalculateCompletion();
+        }
     }
 
     return(

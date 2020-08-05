@@ -42,7 +42,7 @@ const Results = props => {
     })
 
     const inputChangedHandler = ( event, controlName ) => {
-        console.log(authForm[controlName].validation)
+        //console.log(authForm[controlName].validation)
         const updatedControls = updateObject( authForm, {
             [controlName]: updateObject( authForm[controlName], {
                 value: event.target.value,
@@ -76,7 +76,7 @@ const Results = props => {
         } );
     }
 
-    console.log(formElementsArray[0].config.valid)
+    //console.log(formElementsArray[0].config.valid)
 
     let form = formElementsArray.map( formElement => (
         <Input

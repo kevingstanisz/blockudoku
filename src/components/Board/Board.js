@@ -172,8 +172,6 @@ const Board = props => {
 
                 for(var x = boxRow * 3; x < (boxRow + 1) * 3; x++) {
                     for(var y = boxColumn * 3; y < (boxColumn + 1) * 3; y++) {
-                        console.log(x)
-                        console.log(y)
                         hoverCompletionBoard[y][x] = 1; 
                     }
                 }  

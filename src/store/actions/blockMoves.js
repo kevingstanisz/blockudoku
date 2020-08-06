@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import createArray from '../../utilities/Create2DArray';
 import axios from '../../axios-standings';
+import censorAxios from '../../axios-censor';
 
 export const pickUpBlock = ({clientX, clientY}, id) => {
     return{
@@ -109,7 +110,7 @@ export const storeResults = (results) => {
         dispatch(newGame());
         axios.post('/results.json', results)
             .then(response => {
-                if(results.score > JSON.parse(localStorage.getItem("highscore"))){
+                if(results.score > JSON.parse(localStorage.getItem("highscore")) || localStorage.getItem("highscore") === null){
                     localStorage.setItem("highscore", JSON.stringify(response.data.name));
                 }
                 localStorage.setItem("lastscore", JSON.stringify(response.data.name));
@@ -165,4 +166,22 @@ export const resumeOldGame = () => {
     return{
         type: actionTypes.RESUME_OLD_GAME,
     }
+}
+
+export const badUsername = () => {
+    return{
+        type: actionTypes.BAD_USERNAME,
+    }
+}
+
+export const checkUsername = (results) => {
+    return dispatch => {
+        censorAxios.get('/bad-word-filter?content=' + results.name + '&user-id=kevingstanisz&api-key=szSHtdugmgvFCC4HXyTZKvaSrE6nssbu8vtfZM1JYMw2Datf')
+            .then( response => {
+                response.data['is-bad'] ? dispatch(badUsername()) : dispatch(storeResults(results))
+            } )
+            .catch( error => {
+                console.log(error);
+            } );
+    };
 }

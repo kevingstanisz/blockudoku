@@ -25,6 +25,10 @@ const Board = props => {
     const onAddScore = (addScore) => dispatch(actions.updateScore(addScore));
     const onNewGame = () => dispatch(actions.newGame());
 
+    const newGameHandler = () => {
+        onNewGame();
+    }
+
     const endGame = useSelector(state => {
         return state.endOfGame;
     }); 
@@ -239,7 +243,7 @@ const Board = props => {
         <React.Fragment>
             {/* <Modal show = {endGame} modalClosed = {this.purchaseCancelHandler}>{orderSummary}</Modal> */}
             {/* <Modal show = {endGame}><Results newGame = {onNewGame}></Results></Modal> */}
-            <Modal show = {endGame}><Results></Results></Modal>
+            <Modal show = {endGame}><Results startNewGame={newGameHandler}></Results></Modal>
             <Score></Score>
             <table className = {classes.BoardStyle}>
                 <tbody className = {classes.TableBody}>

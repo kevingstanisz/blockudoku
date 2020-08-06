@@ -10,6 +10,7 @@ const Results = props => {
     const dispatch = useDispatch();
     const onStoreResults = (order) => dispatch(actions.storeResults(order));
     const onFetchResults = () => dispatch(actions.fetchResults());
+    const onCheckUsername = (results) => dispatch(actions.checkUsername(results));
 
     const finalScore = useSelector(state => {
         return state.score;
@@ -17,6 +18,10 @@ const Results = props => {
 
     const results = useSelector(state => {
         return state.results;
+    }); 
+
+    const badUsername = useSelector(state => {
+        return state.badInput;
     }); 
 
     if(!results.length){
@@ -32,8 +37,9 @@ const Results = props => {
                 },
                 value: '',
                 validation: {
-                    required: false,
-                    isEmail: false
+                    required: true,
+                    isEmail: false,
+                    minLength: 3
                 },
                 valid: false,
                 touched: false
@@ -65,7 +71,7 @@ const Results = props => {
             name: formData.name
         }
 
-        onStoreResults(results);
+        onCheckUsername(results)
     }
 
     const formElementsArray = [];
@@ -96,14 +102,22 @@ const Results = props => {
     //     return <li key = {igKey}><span style = {{textTransform: 'capitalize'}}>{igKey}</span>: {this.props.ingredients[igKey]}</li>;
     // })
 
+    let errorMessage = null; 
+
+    if(badUsername){
+        errorMessage = <p>Invalid Name - Please enter appropriate name.</p>
+    }
+
     return(
         <React.Fragment>
             <h3>Bummer</h3>
             <p>You Lost</p>
+            {errorMessage}
             <form onSubmit={submitHandler}>
                 {form}
-                <Button btnType="Success">NEW GAME</Button>
+                <Button btnType="Success">SAVE SCORE</Button>
             </form>
+            <Button clicked={props.startNewGame} btnType="Danger">CANCEL</Button>
         </React.Fragment>
     );
     

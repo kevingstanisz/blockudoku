@@ -16,11 +16,12 @@ const intialState = {
     boardPos : {
         startingPos: POSITION, tileSize: 0
     },
-    blockudokuBoard: createArray(9, 9),
+    blockudokuBoard: createFullArray(9, 9),
     score: 0, 
     generateNewBlocks: true,
     endOfGame: false,
-    results: [] 
+    results: [],
+    badInput: false 
 }
 
 const placeable = (gridX, gridY, piece, board) => {
@@ -290,7 +291,8 @@ const reducer = (state = intialState, action) => {
                 blockudokuBoard: action.boardArray,
                 endOfGame: false,
                 generateNewBlocks: true,
-                score: 0
+                score: 0,
+                badInput: false
             };
 
         case actionTypes.FETCH_RESULTS_SUCCESS: 
@@ -305,6 +307,12 @@ const reducer = (state = intialState, action) => {
                 blockudokuBoard: JSON.parse(localStorage.getItem("board")),
                 starterBlock: JSON.parse(localStorage.getItem("starters")),
                 score: JSON.parse(localStorage.getItem("score")),
+            };
+
+            case actionTypes.BAD_USERNAME: 
+            return{
+                ...state,
+                badInput: true
             };
 
         default: 

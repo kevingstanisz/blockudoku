@@ -14,5 +14,7 @@ export {
     storeResults,
     fetchResults,
     fetchResultsSuccess,
-    resumeOldGame
+    resumeOldGame,
+    checkUsername,
+    badUsername
 } from './blockMoves';

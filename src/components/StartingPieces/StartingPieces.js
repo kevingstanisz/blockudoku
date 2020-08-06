@@ -33,7 +33,7 @@ const StartingPieces = props => {
         newPieces = randomStartingBlock();
         onSetStarterNames(newPieces);
         onBlocksGenerated();
-
+        
         if(!(stateBlockudokuBoard.some(function(arr) {
             return arr.some(item => item !== 0)
         }) || (localStorage.getItem("board") === null))){

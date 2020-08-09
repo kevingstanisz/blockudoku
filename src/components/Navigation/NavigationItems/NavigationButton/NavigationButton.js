@@ -9,7 +9,7 @@ const NavigationButton = props => {
     
     return(
         <li className={classes.NavigationItem}>
-            <Button clicked={props.startNewGame}>this is a button</Button>
+            <Button clicked={props.startNewGame}>{props.children}</Button>
         </li>
     );
 

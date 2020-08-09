@@ -45,6 +45,10 @@ const Board = props => {
         return state.generateNewBlocks;
     }); 
 
+    const score = useSelector(state => {
+        return state.score;
+    }); 
+
     const isDragging = useSelector(state => {
         return activeBlock != -1 ? state.starterBlock[activeBlock].isDragging : false
     }); 
@@ -243,7 +247,7 @@ const Board = props => {
         <React.Fragment>
             {/* <Modal show = {endGame} modalClosed = {this.purchaseCancelHandler}>{orderSummary}</Modal> */}
             {/* <Modal show = {endGame}><Results newGame = {onNewGame}></Results></Modal> */}
-            <Modal show = {endGame}><Results startNewGame={newGameHandler}></Results></Modal>
+            <Modal show = {endGame}><Results score = {score} startNewGame={newGameHandler}></Results></Modal>
             <Score></Score>
             <table className = {classes.BoardStyle}>
                 <tbody className = {classes.TableBody}>

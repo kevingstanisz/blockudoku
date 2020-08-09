@@ -4,6 +4,7 @@ import Input from '../UI/Input/Input'
 import { updateObject, checkValidity } from '../../utilities/Inputs';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/index';
+import classes from './Results.module.css';
 
 const Results = props => {
 
@@ -105,19 +106,21 @@ const Results = props => {
     let errorMessage = null; 
 
     if(badUsername){
-        errorMessage = <p>Invalid Name - Please enter appropriate name.</p>
+        errorMessage = <p className = {classes.RedBold}>Invalid Name - Please enter appropriate name.</p>
     }
 
     return(
         <React.Fragment>
-            <h3>Bummer</h3>
-            <p>You Lost</p>
+            <div className = {classes.CenterTop}>
+            <h3>GAME OVER</h3>
+            <p>Score: {props.score}</p>
+            </div>
             {errorMessage}
             <form onSubmit={submitHandler}>
                 {form}
-                <Button btnType="Success">SAVE SCORE</Button>
+                <Button btnType="Success">SAVE NAME AND SCORE</Button>
             </form>
-            <Button clicked={props.startNewGame} btnType="Danger">CANCEL</Button>
+            <Button clicked={props.startNewGame} btnType="Danger">DON'T SAVE</Button>
         </React.Fragment>
     );
     

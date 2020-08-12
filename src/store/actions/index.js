@@ -16,5 +16,7 @@ export {
     fetchResultsSuccess,
     resumeOldGame,
     checkUsername,
-    badUsername
+    badUsername,
+    cancelNewGame,
+    newGameModal
 } from './blockMoves';

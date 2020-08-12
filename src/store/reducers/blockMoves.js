@@ -21,7 +21,8 @@ const intialState = {
     generateNewBlocks: true,
     endOfGame: false,
     results: [],
-    badInput: false 
+    badInput: false,
+    newGameModal: false
 }
 
 const placeable = (gridX, gridY, piece, board) => {
@@ -292,7 +293,8 @@ const reducer = (state = intialState, action) => {
                 endOfGame: false,
                 generateNewBlocks: true,
                 score: 0,
-                badInput: false
+                badInput: false,
+                newGameModal: false
             };
 
         case actionTypes.FETCH_RESULTS_SUCCESS: 
@@ -309,10 +311,22 @@ const reducer = (state = intialState, action) => {
                 score: JSON.parse(localStorage.getItem("score")),
             };
 
-            case actionTypes.BAD_USERNAME: 
+        case actionTypes.BAD_USERNAME: 
             return{
                 ...state,
                 badInput: true
+            };
+
+        case actionTypes.NEW_GAME_MODAL: 
+            return{
+                ...state,
+                newGameModal: true
+            };  
+
+        case actionTypes.CANCEL_NEW_GAME: 
+            return{
+                ...state,
+                newGameModal: false
             };
 
         default: 

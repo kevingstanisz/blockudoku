@@ -7,7 +7,7 @@ import * as actions from '../../../../store/actions/index'
 
 const NavigationButtons = props => {
     const dispatch = useDispatch();
-    const onNewGame = () => dispatch(actions.newGame());
+    const onNewGame = () => dispatch(actions.newGameModal());
 
     const newGameHandler = () => {
         onNewGame();

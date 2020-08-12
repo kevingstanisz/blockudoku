@@ -93,6 +93,18 @@ export const blocksGenerated = () => {
     }
 }
 
+export const cancelNewGame = () => {
+    return{
+        type: actionTypes.CANCEL_NEW_GAME,
+    }
+}
+
+export const newGameModal = () => {
+    return{
+        type: actionTypes.NEW_GAME_MODAL,
+    }
+}
+
 export const newGame = () => {
     localStorage.removeItem("board");
     localStorage.removeItem("starters");

@@ -6,6 +6,7 @@ import StartingPieces from '../StartingPieces/StartingPieces'
 import Score from '../Score/Score'
 import Modal from '../UI/Modal/Modal'
 import Results from '../Results/Results';
+import NewGame from '../NewGame/NewGame';
 import {useDispatch, useSelector} from 'react-redux';
 import {setBlock} from '../../utilities/RandomStartingBlock';
 import * as actions from '../../store/actions/index';
@@ -47,6 +48,10 @@ const Board = props => {
 
     const score = useSelector(state => {
         return state.score;
+    }); 
+
+    const newGameModal = useSelector(state => {
+        return state.newGameModal;
     }); 
 
     const isDragging = useSelector(state => {
@@ -245,9 +250,8 @@ const Board = props => {
 
     return (
         <React.Fragment>
-            {/* <Modal show = {endGame} modalClosed = {this.purchaseCancelHandler}>{orderSummary}</Modal> */}
-            {/* <Modal show = {endGame}><Results newGame = {onNewGame}></Results></Modal> */}
             <Modal show = {endGame}><Results score = {score} startNewGame={newGameHandler}></Results></Modal>
+            <Modal show = {newGameModal}><NewGame /></Modal>
             <Score></Score>
             <table className = {classes.BoardStyle}>
                 <tbody className = {classes.TableBody}>

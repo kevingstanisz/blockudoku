@@ -13,3 +13,5 @@ export const NEW_GAME = 'NEW_GAME';
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS';
 export const RESUME_OLD_GAME = 'RESUME_OLD_GAME';
 export const BAD_USERNAME  = 'BAD_USERNAME';
+export const CANCEL_NEW_GAME  = 'CANCEL_NEW_GAME';
+export const NEW_GAME_MODAL  = 'NEW_GAME_MODAL';

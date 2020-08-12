@@ -8,8 +8,9 @@ const Score = (props) => {
     });
 
     return(
-        <div className = {classes.Score} >
-            <h1>{score}</h1>
+        <div className = {classes.Score}>
+            <div className = {classes.ScoreCenter}>{score}</div>
+            <div className = {classes.ScoreAdd}>+42 COMBO!</div>
         </div>
     );
 }

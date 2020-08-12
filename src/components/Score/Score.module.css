@@ -1,3 +1,35 @@
 .Score {
-    text-align: center;
+    color: black;
+    display: flex;
 }
+
+.ScoreCenter {
+    margin: auto;
+    width: 10%;
+    margin: 0 0 0 45%;
+    text-align: center;
+    float: left;
+    color:black;
+    font-weight: bold;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    font-size: 2em;
+}
+
+.ScoreAdd {
+    vertical-align: middle;
+    width: 30%;
+    margin-top: 0.92em;
+    margin-bottom: 0.92em;
+    font-size: 1.5em;
+    display: inline-block;
+    color: gray;
+    transition: transform 2.0s ease-in;
+}
+
+
+
+
+
+
+

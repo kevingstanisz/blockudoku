@@ -16,13 +16,14 @@ const intialState = {
     boardPos : {
         startingPos: POSITION, tileSize: 0
     },
-    blockudokuBoard: createFullArray(9, 9),
+    blockudokuBoard: createArray(9, 9),
     score: 0, 
     generateNewBlocks: true,
     endOfGame: false,
     results: [],
     badInput: false,
-    newGameModal: false
+    newGameModal: false,
+    consecutiveRemoved: 0
 }
 
 const placeable = (gridX, gridY, piece, board) => {
@@ -228,7 +229,6 @@ const reducer = (state = intialState, action) => {
             };
 
         case actionTypes.CALCULATE_COMPLETION:
-            console.log("set local storage")
             localStorage.setItem("board", JSON.stringify(state.blockudokuBoard));
             localStorage.setItem("starters", JSON.stringify(state.starterBlock));
             localStorage.setItem("score", JSON.stringify(state.score));
@@ -273,7 +273,8 @@ const reducer = (state = intialState, action) => {
         case actionTypes.UPDATE_SCORE: 
             return{
                 ...state,
-                score: state.score + action.addedScore
+                score: state.score + action.addedScore,
+                consecutiveRemoved: action.addedScore > 18 ? (state.consecutiveRemoved + 1) : 0
             };
 
         case actionTypes.BLOCKS_GENERATED: 

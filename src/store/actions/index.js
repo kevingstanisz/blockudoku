@@ -11,6 +11,7 @@ export {
     updateScore,
     blocksGenerated,
     newGame,
+    acknowledgeRedirect,
     storeResults,
     fetchResults,
     fetchResultsSuccess,

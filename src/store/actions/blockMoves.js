@@ -3,6 +3,7 @@ import createArray from '../../utilities/Create2DArray';
 import axios from '../../axios-standings';
 import censorAxios from '../../axios-censor';
 
+
 export const pickUpBlock = ({clientX, clientY}, id) => {
     return{
         type: actionTypes.PICK_UP_BLOCK,
@@ -105,7 +106,7 @@ export const newGameModal = () => {
     }
 }
 
-export const newGame = () => {
+export const newGame = (redirect) => {
     localStorage.removeItem("board");
     localStorage.removeItem("starters");
     localStorage.removeItem("score");
@@ -113,13 +114,20 @@ export const newGame = () => {
 
     return{
         type: actionTypes.NEW_GAME,
-        boardArray: createArray(9,9)
+        boardArray: createArray(9,9),
+        redirect: redirect
+    }
+}
+
+export const acknowledgeRedirect = () => {
+    return{
+        type: actionTypes.ACKNOWLEDGE_REDIRECT,
     }
 }
 
 export const storeResults = (results) => {
     return dispatch => {
-        dispatch(newGame());
+        dispatch(newGame(true));
         axios.post('/results.json', results)
             .then(response => {
                 if(results.score > JSON.parse(localStorage.getItem("highscore")) || localStorage.getItem("highscore") === null){

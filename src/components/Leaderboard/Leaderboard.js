@@ -8,10 +8,19 @@ const Leaderboard = props => {
 
     const dispatch = useDispatch();
     const onFetchResults = () => dispatch(actions.fetchResults());
+    const onAcknowledgeRedirect = () => dispatch(actions.acknowledgeRedirect());
+
+    const redirect = useSelector(state => {
+        return state.redirect;
+    });
 
     const results = useSelector(state => {
         return state.results;
     }); 
+
+    if(redirect){
+        onAcknowledgeRedirect()
+    }
 
     if(!results.length){
         onFetchResults();

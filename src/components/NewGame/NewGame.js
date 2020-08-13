@@ -10,10 +10,10 @@ const NewGame = props => {
 
     const dispatch = useDispatch();
     const onNewGame = () => dispatch(actions.newGame());
-    const onCancelNewGame = () => dispatch(actions.cancelNewGame());
+    const onCancelNewGame = (redirect) => dispatch(actions.cancelNewGame(redirect));
 
     const newGameHandler = () => {
-        onNewGame();
+        onNewGame(false);
     }
 
     const cancelNewGameHandler = () => {

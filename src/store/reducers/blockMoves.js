@@ -24,7 +24,8 @@ const intialState = {
     badInput: false,
     newGameModal: false,
     consecutiveRemoved: 0,
-    addScore: 0
+    addScore: 0,
+    redirect: false
 }
 
 const placeable = (gridX, gridY, piece, board) => {
@@ -298,7 +299,14 @@ const reducer = (state = intialState, action) => {
                 generateNewBlocks: true,
                 score: 0,
                 badInput: false,
-                newGameModal: false
+                newGameModal: false,
+                redirect: action.redirect
+            };
+
+        case actionTypes.ACKNOWLEDGE_REDIRECT: 
+            return{
+                ...state,
+                redirect: false
             };
 
         case actionTypes.FETCH_RESULTS_SUCCESS: 

@@ -18,7 +18,6 @@ const LeaderCard = (props) => {
 
     if(localStorage.getItem("lastscore") !== null){
         if(props.highlight || (localStorage.getItem("highscore").replace(/['"]+/g, '') == props.id) || (localStorage.getItem("lastscore").replace(/['"]+/g, '') == props.id)){
-            console.log('hi');
             attachedClasses.push(classes.HighlightedRow)
             attachedClasses.push(classes.signpost)
         }

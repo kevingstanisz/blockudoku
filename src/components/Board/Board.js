@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setBlock} from '../../utilities/RandomStartingBlock';
 import * as actions from '../../store/actions/index';
 import axios from '../../axios-standings';
+import { Route, Redirect } from 'react-router-dom';
 
 const Board = props => {
 
@@ -24,11 +25,15 @@ const Board = props => {
     const onResetBlock = (id, addScore) => dispatch(actions.resetBlock(id, addScore));
     const onCalculateCompletion = () => dispatch(actions.calculateCompletion());
     const onAddScore = (addScore) => dispatch(actions.updateScore(addScore));
-    const onNewGame = () => dispatch(actions.newGame());
+    const onNewGame = (redirect) => dispatch(actions.newGame(redirect));
 
     const newGameHandler = () => {
-        onNewGame();
+        onNewGame(false);
     }
+
+    const redirect = useSelector(state => {
+        return state.redirect;
+    });
 
     const endGame = useSelector(state => {
         return state.endOfGame;
@@ -86,6 +91,10 @@ const Board = props => {
     const tileSize = useSelector(state => {
         return activeBlock != -1 ? state.boardPos.tileSize : 1
     });
+
+    if(redirect){
+        return <Redirect to="/leaderboard" />;
+    }
     
 
     let tileX  = Math.round((translation.x - starterOffsetX) / tileSize);

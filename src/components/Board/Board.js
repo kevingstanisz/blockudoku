@@ -50,6 +50,10 @@ const Board = props => {
         return state.score;
     }); 
 
+    const consecRemoved = useSelector(state => {
+        return state.consecutiveRemoved
+    });
+
     const newGameModal = useSelector(state => {
         return state.newGameModal;
     }); 
@@ -198,20 +202,12 @@ const Board = props => {
             addScore = numberOfTiles
         }
 
-        switch(totalRemoved){
-            case 1:
-                addScore += 18;
-                break;
-            case 2:
-                addScore += 2*18;
-                break;
-            case 3:
-                addScore += 6*18;
-                break;
-            default:
-                addScore += 0;
-        }
+        addScore += totalRemoved * 18
 
+        if(totalRemoved > 0){
+            addScore += consecRemoved * 9
+        }
+        
         onAddScore(addScore);
 
         if(addScore > 18) {

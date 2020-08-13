@@ -23,7 +23,8 @@ const intialState = {
     results: [],
     badInput: false,
     newGameModal: false,
-    consecutiveRemoved: 0
+    consecutiveRemoved: 0,
+    addScore: 0
 }
 
 const placeable = (gridX, gridY, piece, board) => {
@@ -143,7 +144,8 @@ const reducer = (state = intialState, action) => {
                 starterBlock: state.starterBlock.map(
                     (starterBlock, i) => i === action.id ? {...starterBlock, isDragging: true, origin:  {x: action.clientX, y: action.clientY}}
                                                         :starterBlock
-                    )
+                    ),
+                    addScore: 0
             } ;
 
         case actionTypes.SET_DOWN_BLOCK: 
@@ -274,7 +276,8 @@ const reducer = (state = intialState, action) => {
             return{
                 ...state,
                 score: state.score + action.addedScore,
-                consecutiveRemoved: action.addedScore > 18 ? (state.consecutiveRemoved + 1) : 0
+                consecutiveRemoved: action.addedScore > 18 ? (state.consecutiveRemoved + 1) : 0,
+                addScore: action.addedScore
             };
 
         case actionTypes.BLOCKS_GENERATED: 

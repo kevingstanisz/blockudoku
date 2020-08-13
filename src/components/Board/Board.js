@@ -100,6 +100,15 @@ const Board = props => {
     let tileX  = Math.round((translation.x - starterOffsetX) / tileSize);
     let tileY  = Math.round((translation.y - starterOffsetY) / tileSize);
 
+    //prevent tile from going off edge and breaking everything
+    if(tileY >= 11){
+        tileY = 10;
+    }
+
+    if(tileX >= 11){
+        tileX = 10;
+    }
+
     const chosenBlock = setBlock(starterName);
 
     let numberOfTiles = 0
@@ -167,10 +176,11 @@ const Board = props => {
     var hoverCompletionBoard = createArray(9,9);
     let totalRemoved = 0;
 
-    // console.log(tileX + 2)
-    // console.log(tileY + 2)
+    //console.log(tileX + 2)
+    //console.log(tileY + 2)
 
     if(starterHoverComplete != 0 && tileY >= -2 && tileY <= 11 && tileX >= -2 && tileX <= 11){
+        //console.log("tileY " + (tileY + 2) + " tileX " + (tileX + 2))
         if(starterHoverComplete[tileY + 2][tileX + 2].column.length){
             totalRemoved += starterHoverComplete[tileY + 2][tileX + 2].column.length;
             for(var i = 0; i < starterHoverComplete[tileY + 2][tileX + 2].column.length; i++){

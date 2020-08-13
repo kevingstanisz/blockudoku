@@ -118,7 +118,7 @@ const Results = props => {
             {errorMessage}
             <form onSubmit={submitHandler}>
                 {form}
-                <Button btnType="Success">SAVE NAME AND SCORE</Button>
+                <Button disabled={!formElementsArray[0].config.valid} btnType="Success">SAVE NAME AND SCORE</Button>
             </form>
             <Button clicked={props.startNewGame} btnType="Danger">DON'T SAVE</Button>
         </React.Fragment>

@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from '../UI/Button/Button';
-import Input from '../UI/Input/Input'
-import { updateObject, checkValidity } from '../../utilities/Inputs';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import classes from './NewGame.module.css';
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import StartingPiece from './StartingPiece/StartingPiece';
 import classes from './StartingPieces.module.css'
-import createArray from '../../utilities/Create2DArray';
 import randomStartingBlock from '../../utilities/RandomStartingBlock';
 import {setBlock} from '../../utilities/RandomStartingBlock';
 import * as actions from '../../store/actions/index';

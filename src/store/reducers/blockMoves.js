@@ -1,8 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
-import startingPiece from '../../components/StartingPieces/StartingPieces'
-import createArray, {makeObject, createFullArray} from '../../utilities/Create2DArray';
+import createArray, {makeObject} from '../../utilities/Create2DArray';
 import {setBlock} from '../../utilities/RandomStartingBlock'
-import { setStarterNames } from '../actions';
 
 const POSITION = {x: 0, y: 0}
 
@@ -29,8 +27,8 @@ const intialState = {
 }
 
 const placeable = (gridX, gridY, piece, board) => {
-    for(var y = 0; y < piece.length; y++) {
-        for(var x = 0; x < piece.length; x++) {
+    for(let y = 0; y < piece.length; y++) {
+        for(let x = 0; x < piece.length; x++) {
             if(piece[y][x]){
                 if(gridX + x < 0 || gridY + y < 0 || gridX + x >= board.length || gridY + y >= board.length){
                     return false;
@@ -48,10 +46,9 @@ const placeable = (gridX, gridY, piece, board) => {
 const completeRow = (gridX, gridY, piece, board) => {
     let totalComplete = 0;
     let rowsCompletable = [];
-    for(var y = 0; y < board.length; y++) {
+    for(let y = 0; y < board.length; y++) {
         totalComplete = 0;
-        gridRow:
-        for(var x = 0; x < board.length; x++) {
+        for(let x = 0; x < board.length; x++) {
             if(board[y][x]){
                 totalComplete++;
             }
@@ -60,10 +57,10 @@ const completeRow = (gridX, gridY, piece, board) => {
                 totalComplete++;
             }
             else{
-                break gridRow;
+                break;
             }
 
-            if(totalComplete == board.length){
+            if(totalComplete === board.length){
                 rowsCompletable.push(y)
             }
         }
@@ -75,10 +72,9 @@ const completeRow = (gridX, gridY, piece, board) => {
 const completeColumn = (gridX, gridY, piece, board) => {
     let totalComplete = 0;
     let columnsCompletable = [];
-    for(var x = 0; x < board.length; x++) {
+    for(let x = 0; x < board.length; x++) {
         totalComplete = 0;
-        gridColumn:
-        for(var y = 0; y < board.length; y++) {
+        for(let y = 0; y < board.length; y++) {
             if(board[y][x]){
                 totalComplete++;
             }
@@ -87,10 +83,10 @@ const completeColumn = (gridX, gridY, piece, board) => {
                 totalComplete++;
             }
             else{
-                break gridColumn;
+                break;
             }
 
-            if(totalComplete == board.length){
+            if(totalComplete === board.length){
                 columnsCompletable.push(x)
             }
         }
@@ -105,14 +101,14 @@ const completeBox = (gridX, gridY, piece, board) => {
     let boxRow = 0;
     let boxColumn = 0;
 
-    for(var boxNumber = 0; boxNumber < 9; boxNumber++){
+    for(let boxNumber = 0; boxNumber < 9; boxNumber++){
         totalComplete = 0;
         boxRow = Math.floor(boxNumber / 3);
         boxColumn = boxNumber % 3;
 
         gridBox:
-        for(var x = boxRow * 3; x < (boxRow + 1) * 3; x++) {
-            for(var y = boxColumn * 3; y < (boxColumn + 1) * 3; y++) {
+        for(let x = boxRow * 3; x < (boxRow + 1) * 3; x++) {
+            for(let y = boxColumn * 3; y < (boxColumn + 1) * 3; y++) {
                 if(board[y][x]){
                     totalComplete++;
                 }
@@ -125,7 +121,7 @@ const completeBox = (gridX, gridY, piece, board) => {
                 }
             }
 
-            if(totalComplete == board.length){
+            if(totalComplete === board.length){
                 boxesCompletable.push(boxNumber)
             }
         }
@@ -183,7 +179,7 @@ const reducer = (state = intialState, action) => {
             }
 
             let newBlocks = false;
-            if(numberBlocksUsed == state.starterBlock.length){
+            if(numberBlocksUsed === state.starterBlock.length){
                 newBlocks = true;
             }
 
@@ -241,14 +237,14 @@ const reducer = (state = intialState, action) => {
             let placeablePiece = false;
             let endGame = true;
 
-            for(var pieceNumber = 0; pieceNumber < state.starterBlock.length; pieceNumber++){
+            for(let pieceNumber = 0; pieceNumber < state.starterBlock.length; pieceNumber++){
                 newCompletion.push(makeObject(createArray(13, 13)));
                 if(!state.starterBlock[pieceNumber].placed){
                     let tempPiece = setBlock(state.starterBlock[pieceNumber].name);
                     placeablePiece = false;
 
-                    for(var y = -2; y < 7; y++) {
-                        for(var x = -2; x < 7; x++) {
+                    for(let y = -2; y < 7; y++) {
+                        for(let x = -2; x < 7; x++) {
                             if(placeable(x, y, tempPiece, state.blockudokuBoard)){
                                 placeablePiece = true;
                                 endGame = false;

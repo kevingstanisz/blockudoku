@@ -164,15 +164,6 @@ export function setBlock(chosenBlock){
 
             return block;
 
-        case 'fiveRight':
-            block.push([0, 0, 0, 0, 0]);
-            block.push([0, 0, 0, 0, 0]);
-            block.push([1, 1, 1, 1, 1]);
-            block.push([0, 0, 0, 0, 0]);
-            block.push([0, 0, 0, 0, 0]);
-
-            return block;
-
         case 'smallTUp':
             block.push([0, 0, 0, 0, 0]);
             block.push([0, 0, 1, 0, 0]);
@@ -418,11 +409,11 @@ export function setBlock(chosenBlock){
 // smalltopRightCorner.push([0, 0, 0, 0]);
 
 function RandomStarter (){
-    let allBlocks = ['bigBottomLeftCorner','bigBottomRightCorner','bigTopLeftCorner','bigTopRightCorner','fiveRight','fiveRight','fiveUp','fourRight','fourStaircaseDown','fourStaircaseUp','fourUp','lBottom','lLeft','lRight','lTop','one','plus','smallBottomLeftCorner','smallBottomRightCorner','smallTDown','smallTLeft','smallTopLeftCorner','smallTopRightCorner','smallTRight','smallTUp','square','tDown','threeRight','threeStaircaseDown','threeStaircaseUp','threeUp','tLeft','tRight','tUp','twoAndTwoDown','twoAndTwoLeft','twoAndTwoRight','twoAndTwoUp','twoRight','twoUp','uDown','uLeft','uRight','uUp']
+    let allBlocks = ['bigBottomLeftCorner','bigBottomRightCorner','bigTopLeftCorner','bigTopRightCorner','fiveRight','fiveUp','fourRight','fourStaircaseDown','fourStaircaseUp','fourUp','lBottom','lLeft','lRight','lTop','one','plus','smallBottomLeftCorner','smallBottomRightCorner','smallTDown','smallTLeft','smallTopLeftCorner','smallTopRightCorner','smallTRight','smallTUp','square','tDown','threeRight','threeStaircaseDown','threeStaircaseUp','threeUp','tLeft','tRight','tUp','twoAndTwoDown','twoAndTwoLeft','twoAndTwoRight','twoAndTwoUp','twoRight','twoUp','uDown','uLeft','uRight','uUp']
 
     let chosenBlocks = []
 
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
         let randomBlock = allBlocks[Math.floor(Math.random() * allBlocks.length)]
         chosenBlocks.push({block: setBlock(randomBlock), name: randomBlock})
     }

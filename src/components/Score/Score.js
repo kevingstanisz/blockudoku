@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Score.module.css';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const Score = (props) => {
     const score = useSelector(state => {

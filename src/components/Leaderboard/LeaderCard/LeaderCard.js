@@ -1,12 +1,11 @@
 import React from 'react';
 import classes from './LeaderCard.module.css';
-import {useDispatch, useSelector} from 'react-redux';
 
 const LeaderCard = (props) => {
 
     let attachedClasses = [classes.CardStyle];
 
-    if(props.place == "Rank"){
+    if(props.place === "Rank"){
         attachedClasses.push(classes.TableHeader)
     }
     else if(props.place % 2) {
@@ -17,7 +16,7 @@ const LeaderCard = (props) => {
     }
 
     if(localStorage.getItem("lastscore") !== null){
-        if(props.highlight || (localStorage.getItem("highscore").replace(/['"]+/g, '') == props.id) || (localStorage.getItem("lastscore").replace(/['"]+/g, '') == props.id)){
+        if(props.highlight || (localStorage.getItem("highscore").replace(/['"]+/g, '') === props.id) || (localStorage.getItem("lastscore").replace(/['"]+/g, '') === props.id)){
             attachedClasses.push(classes.HighlightedRow)
             attachedClasses.push(classes.signpost)
         }

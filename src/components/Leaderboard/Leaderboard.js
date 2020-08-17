@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import classes from './Leaderboard.module.css'
+import React from 'react';
 import LeaderCard from './LeaderCard/LeaderCard'
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/index';
@@ -32,14 +31,14 @@ const Leaderboard = props => {
     let recentScoreRank = 0;
 
     for(let i = 0; i < results.length; i++){
-        if(JSON.parse(localStorage.getItem("highscore")) == results[i].id){
+        if(JSON.parse(localStorage.getItem("highscore")) === results[i].id){
             if(i > 9){
                 highScore = results[i];
                 highScoreRank = i + 1
             }
         }
 
-        if(JSON.parse(localStorage.getItem("lastscore")) == results[i].id){
+        if(JSON.parse(localStorage.getItem("lastscore")) === results[i].id){
             if(i > 9 && (localStorage.getItem("lastscore") !== localStorage.getItem("highscore"))){
                 recentScore = results[i];
                 recentScoreRank = i + 1

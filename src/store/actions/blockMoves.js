@@ -140,8 +140,7 @@ export const storeResults = (results) => {
                 dispatch(fetchResults());
             })
             .catch(error => {
-                console.log('hello');
-                //dispatch(purchaseBurgerFail(error));
+                console.log('error');
             });
     }
 }

@@ -17,13 +17,15 @@
     padding: 8px 24px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
     font-weight: bold;
     font-family: "Open Sans", sans-serif;
     font-size: 1.0em;
+    display: block;
+    float: left;
+    clear: left
 }
 /* 
 .Button:first-of-type {

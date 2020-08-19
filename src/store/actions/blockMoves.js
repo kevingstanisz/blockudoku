@@ -4,11 +4,11 @@ import axios from '../../axios-standings';
 import censorAxios from '../../axios-censor';
 
 
-export const pickUpBlock = ({clientX, clientY}, id) => {
+export const pickUpBlock = (event, id) => {
     return{
         type: actionTypes.PICK_UP_BLOCK,
-        clientX: clientX,
-        clientY: clientY,
+        clientX: event.clientX,
+        clientY: event.clientY,
         id: id
     }
 }
@@ -20,11 +20,11 @@ export const setDownBlock = (id) => {
     }
 }
 
-export const moveBlock = ({clientX, clientY}, id) => {
+export const moveBlock = (event, id) => {
     return{
         type: actionTypes.MOVE_BLOCK,
-        clientX: clientX,
-        clientY: clientY,
+        clientX: event.clientX,
+        clientY: event.clientY,
         id: id
     }
 }

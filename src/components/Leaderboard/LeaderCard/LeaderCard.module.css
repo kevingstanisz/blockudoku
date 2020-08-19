@@ -1,12 +1,6 @@
-.CardStyle {
-    width: 90%;
-    height: 50px; 
-    margin: 5px auto;
-}
-
 .signpost { /* our rectangle */
     width:250px;
-    height:50px;
+    height:40px;
     background-color: #a9a9ff;
     margin:25px auto;
     position: relative;
@@ -19,7 +13,7 @@
     left:100%; /* push it way overto the right*/
     height:0; /* we're doing this with borders remember */
     width:0; 
-    border-width: 25px;
+    border-width: 20px;
     border-style:solid;
     border-color:#a9a9ff; /* same as bg of our rectangle */
     /* now we make some of theborders disappear*/
@@ -27,6 +21,12 @@
     border-bottom-color:transparent;
     border-right-color:transparent;
   }
+
+.CardStyle {
+    width: 80%;
+    height: 40px; 
+    margin: 5px auto;
+}
 
 .FirstChild {
     width: 30%;
@@ -65,6 +65,15 @@
 }
 
 @media (min-width: 1100px){
+    .signpost { /* our rectangle */
+        width:200px;
+        height:50px;
+      }
+
+      .signpost:after { /*  our pseudo-element */
+        border-width: 25px;
+      }
+
     .CardStyle {
         width: 1000px;
         height: 50px; 

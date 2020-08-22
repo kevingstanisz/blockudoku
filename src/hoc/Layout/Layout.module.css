@@ -9,3 +9,8 @@
     background-color: #f8f8ff;
 }
 
+@media (max-width: 600px){
+    .Content {
+        margin-top: 50px;
+      }
+}

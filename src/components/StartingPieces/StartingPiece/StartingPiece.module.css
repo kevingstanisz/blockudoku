@@ -21,3 +21,11 @@
 .HidePiece{
     visibility: hidden;
 }
+
+@media (max-width: 600px){
+    .Thirds{
+        width:33.33%;
+        height: 150px;
+        float: left;
+    }
+}

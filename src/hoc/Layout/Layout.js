@@ -18,8 +18,6 @@ const Layout = props => {
         <div className = {classes.WholePage}>
             <Toolbar
                  />
-            <SideDrawer
-                 />
             <main className={classes.Content}>
                 {props.children}
             </main>

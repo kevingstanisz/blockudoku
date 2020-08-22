@@ -38,28 +38,40 @@ const StartingPiece = props => {
     const onResetBlock = (id) => dispatch(actions.resetBlock(id));
 
     const handleMouseDown = useCallback((event) => {
+        onPickUpBlock(event, props.id)
+    }, []);
+
+    const handleTouchStart = useCallback((event) => {
         onPickUpBlock(event.touches[0], props.id)
     }, []);
 
     const handleMouseMove = useCallback((event) => {
+        onMoveBlock(event, props.id)
+    }, [origin]);
+
+    const handleTouchMove = useCallback((event) => {
         onMoveBlock(event.touches[0], props.id)
     }, [origin]);
 
-    const handleMouseUp = useCallback(() => {
+    const handleMouseTouchUp = useCallback(() => {
         onSetDownBlock(props.id);
     }, []);
 
     useEffect(() => {
         if(isDragging){
-            window.addEventListener('touchmove', handleMouseMove)
-            window.addEventListener('touchend', handleMouseUp)
+            window.addEventListener('touchmove', handleTouchMove)
+            window.addEventListener('touchend', handleMouseTouchUp)
+            window.addEventListener('mousemove', handleMouseMove)
+            window.addEventListener('mouseup', handleMouseTouchUp)
         } else {
-            window.removeEventListener('touchmove', handleMouseMove)
-            window.removeEventListener('touchend', handleMouseUp)
+            window.removeEventListener('touchmove', handleTouchMove)
+            window.removeEventListener('touchend', handleMouseTouchUp)
+            window.removeEventListener('mousemove', handleMouseMove)
+            window.removeEventListener('mouseup', handleMouseTouchUp)
 
             onResetBlock(props.id);
         }
-    }, [isDragging, handleMouseMove, handleMouseUp]);
+    }, [isDragging, handleMouseMove, handleMouseTouchUp]);
 
     const styles = useMemo(() => ({
         cursor: isDragging ? '-webkit-grabbing' : 'webkit-grab',
@@ -103,7 +115,7 @@ const StartingPiece = props => {
     }
 
     return(
-        <div className = {attachedClasses.join(' ')} style = {styles} onTouchStart = {handleMouseDown}>
+        <div className = {attachedClasses.join(' ')} style = {styles} onTouchStart = {handleTouchStart} onMouseDown = {handleMouseDown}>
             <table className = {classes.PieceLayout}>
                 <tbody>
                     {finalDisplayBoard}

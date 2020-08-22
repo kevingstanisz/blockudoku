@@ -2,6 +2,7 @@
     overflow:hidden;
     background-color: #f8f8ff;
     height:100%;
+    overscroll-behavior: none;
 }
 
 .Content {

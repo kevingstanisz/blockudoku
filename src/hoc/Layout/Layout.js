@@ -19,11 +19,9 @@ const Layout = props => {
         <div className = {classes.WholePage}>
             <Toolbar
                  />
-            <ScrollLock>
             <main className={classes.Content}>
                 {props.children}
             </main>
-            </ScrollLock>
         </div>
     )
 }

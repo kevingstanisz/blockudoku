@@ -59,8 +59,34 @@
     100% {
         opacity: 0.0;
     }
-  }
+}
 
+@media (max-width: 600px){
+    .ScoreAddExcited {
+        vertical-align: middle;
+        width: 30%;
+        margin-left: 1.0em;
+        margin-top: 2.0em;
+        margin-bottom: 0.67em;
+        font-size: 1em;
+        display: inline-block;
+        color: gray;
+        font-weight: bold;
+        opacity: 0.0;
+    }
+
+    .ScoreAdd {
+        vertical-align: middle;
+        width: 30%;
+        margin-left: 1.0em;
+        margin-top: 2.0em;
+        margin-bottom: 0.92em;
+        font-size: 1.0em;
+        display: inline-block;
+        color: gray;
+        opacity: 0.0;
+    }
+}
 
 
 

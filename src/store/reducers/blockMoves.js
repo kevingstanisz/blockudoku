@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes'
-import createArray, {makeObject} from '../../utilities/Create2DArray';
+import createArray, {createFullArray, makeObject} from '../../utilities/Create2DArray';
 import {setBlock} from '../../utilities/RandomStartingBlock'
 
 const POSITION = {x: 0, y: 0}

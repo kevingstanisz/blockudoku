@@ -5,10 +5,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
   overflow:hidden;
+  touch-action: none;
 }
 
 * {
   overscroll-behavior: none;
+  touch-action: none;
 }
 
 code {

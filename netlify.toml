@@ -1,4 +1,4 @@
 [build]
-  command = "yarn build && cd functions/node-fetch && yarn"
+  command = "yarn build && cd functions/badWords && yarn"
   functions = "functions"
   publish = "dist"

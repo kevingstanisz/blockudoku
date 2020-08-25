@@ -71,7 +71,6 @@ const Results = props => {
             name: formData.name
         }
 
-        console.log(props.history)
         onCheckUsername(results)
     }
 

@@ -135,7 +135,6 @@ export const storeResults = (results) => {
                 }
                 localStorage.setItem("lastscore", JSON.stringify(response.data.name));
 
-                console.log(response)
                 localStorage.setItem("name", JSON.stringify(results.name));
                 dispatch(fetchResults());
             })
@@ -195,7 +194,7 @@ export const badUsername = () => {
 
 export const checkUsername = (results) => {
     return dispatch => {
-        censorAxios.get('/bad-word-filter?content=' + results.name + '&user-id=kevingstanisz&api-key=szSHtdugmgvFCC4HXyTZKvaSrE6nssbu8vtfZM1JYMw2Datf')
+        censorAxios.get('/.netlify/functions/badWords', { params: { name: results.name } })
             .then( response => {
                 response.data['is-bad'] ? dispatch(badUsername()) : dispatch(storeResults(results))
             } )

@@ -16,8 +16,7 @@
     "react-scrolllock": "^5.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.9.7",
-    "yarn": "^1.22.4"
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",

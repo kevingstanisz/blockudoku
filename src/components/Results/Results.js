@@ -70,7 +70,7 @@ const Results = props => {
             score: finalScore,
             name: formData.name
         }
-
+        setAuthForm({valid : false})
         onCheckUsername(results)
     }
 

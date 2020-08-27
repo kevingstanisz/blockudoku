@@ -18,3 +18,9 @@
         left: calc(50% - 250px);
     }
 }
+
+@media (max-width: 400px) {
+    .Modal {
+        padding: 16px 6px;
+    }
+}

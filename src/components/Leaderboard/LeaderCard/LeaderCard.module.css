@@ -84,16 +84,16 @@
 @media (max-height: 670px){
     .signpost { /* our rectangle */
         width:200px;
-        height:36px;
+        height:32px;
       }
 
       .signpost:after { /*  our pseudo-element */
-        border-width: 18px;
+        border-width: 16px;
       }
 
     .CardStyle {
         width: 80%;
-        height: 36px; 
+        height: 32px; 
         margin: 5px auto;
     }
 } 

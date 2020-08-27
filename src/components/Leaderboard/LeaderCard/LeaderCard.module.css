@@ -81,7 +81,7 @@
     }
 } 
 
-@media (max-height: 500px){
+@media (max-height: 670px){
     .signpost { /* our rectangle */
         width:200px;
         height:30px;

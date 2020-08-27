@@ -81,3 +81,21 @@
     }
 } 
 
+@media (max-height: 500px){
+    .signpost { /* our rectangle */
+        width:200px;
+        height:30px;
+      }
+
+      .signpost:after { /*  our pseudo-element */
+        border-width: 15px;
+      }
+
+    .CardStyle {
+        width: 80%;
+        height: 30px; 
+        margin: 5px auto;
+    }
+} 
+
+

@@ -2,6 +2,7 @@ import React from 'react';
 import LeaderCard from './LeaderCard/LeaderCard'
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/index';
+import classes from './Leaderboard.module.css';
 
 const Leaderboard = props => {
 
@@ -73,7 +74,7 @@ const Leaderboard = props => {
     }
 
     return (
-        <React.Fragment>
+        <div className = {classes.MarginTop}>
             <LeaderCard
                     key={0}
                     place={"Rank"}
@@ -91,7 +92,7 @@ const Leaderboard = props => {
             ) )}
             {userHighScore}
             {userRecentScore}
-        </React.Fragment>
+        </div>
     );
 }
 

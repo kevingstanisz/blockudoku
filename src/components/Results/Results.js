@@ -42,6 +42,7 @@ const Results = props => {
                     minLength: 3
                 },
                 valid: false,
+                lockButton: false,
                 touched: false
             }
         
@@ -53,7 +54,8 @@ const Results = props => {
             [controlName]: updateObject( authForm[controlName], {
                 value: event.target.value,
                 valid: checkValidity( event.target.value, authForm[controlName].validation ),
-                touched: true
+                touched: true,
+                lockButton: false
             } )
         } );
         setAuthForm(updatedControls);
@@ -70,7 +72,14 @@ const Results = props => {
             score: finalScore,
             name: formData.name
         }
-        setAuthForm({valid : false})
+
+        const updatedControls = updateObject( authForm, {
+            ['name']: updateObject( authForm['name'], {
+                lockButton: true
+            } )
+        } );
+        setAuthForm(updatedControls);
+        
         onCheckUsername(results)
     }
 
@@ -117,7 +126,7 @@ const Results = props => {
             {errorMessage}
             <form onSubmit={submitHandler}>
                 {form}
-                <Button disabled={!formElementsArray[0].config.valid} btnType="Success">SAVE NAME AND SCORE</Button>
+                <Button disabled={!formElementsArray[0].config.valid || authForm.name.lockButton} btnType="Success">SAVE NAME AND SCORE</Button>
             </form>
             <Button clicked={props.startNewGame} btnType="Danger">DON'T SAVE</Button>
         </React.Fragment>

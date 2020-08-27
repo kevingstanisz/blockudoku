@@ -194,7 +194,7 @@ export const badUsername = () => {
 
 export const checkUsername = (results) => {
     return dispatch => {
-        censorAxios.get('/.netlify/functions/badWords', { params: { name: results.name } })
+        censorAxios.get('/.netlify/functions/token-hider', { params: { name: results.name } })
             .then( response => {
                 response.data['is-bad'] ? dispatch(badUsername()) : dispatch(storeResults(results))
             } )

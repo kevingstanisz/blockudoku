@@ -14,7 +14,7 @@ const intialState = {
     boardPos : {
         startingPos: POSITION, tileSize: 0
     },
-    blockudokuBoard: createArray(9, 9),
+    blockudokuBoard: createFullArray(9, 9),
     score: 0, 
     generateNewBlocks: true,
     endOfGame: false,

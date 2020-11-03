@@ -196,6 +196,7 @@ export const checkUsername = (results) => {
     return dispatch => {
         censorAxios.get('/.netlify/functions/token-hider', { params: { name: results.name } })
             .then( response => {
+                console.log(response);
                 response.data['is-bad'] ? dispatch(badUsername()) : dispatch(storeResults(results))
             } )
             .catch( error => {

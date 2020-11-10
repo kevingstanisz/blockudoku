@@ -32,7 +32,7 @@ Below or some GIF's of the gameplay.
 
 
 #### Save name to leaderboard after losing. 
-## No using bad words, though! Shoutout to Neutrino API - allows me to add custom bad words so I can add "Bears" as a bad word. Go Packers!
+###### No using bad words, though! Shoutout to Neutrino API - allows me to add custom bad words so I can add "Bears" as a bad word. Go Packers!
 ![Basic Gameplay](demo/savename.gif)
 
 
